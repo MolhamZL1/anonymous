@@ -21,6 +21,7 @@ FUNCTION: 'function';
 RETURN: 'return';
 CONST: 'const';
 LET: 'let';
+CONSTRUCTOR:'constructor';
 VAR: 'var';
 CLASS:'class';
 IMPORT: 'import';
@@ -33,6 +34,18 @@ VIEWCHILD: '@ViewChild';
 COMPONENT: '@Component';
 NGONINIT: 'ngOnInit';
 NGONCHANGES: 'ngOnChanges';
+NEW:'new';
+THIS:'this';
+
+//MODIFIRES
+PUBLIC : 'public';
+PRIVATE : 'private';
+PROTECTED : 'protected';
+READONLY : 'readonly';
+STATIC : 'static';
+ABSTRACT : 'abstract';
+FINAL : 'final';
+ASYNC : 'async';
 
 // Operators
 EQUAL: '=';
@@ -46,7 +59,9 @@ AND: '&&';
 OR: '||';
 NOT: '!';
 EQUAL_TO: '==';
+EQUAL_TO3: '===';
 NOT_EQUAL: '!=';
+NOT_EQUAL2: '!==';
 GREATER_THAN: '>';
 LESS_THAN: '<';
 GREATER_THAN_OR_EQUAL: '>=';
@@ -77,5 +92,5 @@ Null: 'null';
 IDENTIFIER: [a-zA-Z_$][a-zA-Z0-9_$]*;
 
 // Comments
-SINGLE_LINE_COMMENT: '//' ~[\r\n]*;
+SINGLE_LINE_COMMENT: '//' ~[\r\n]* ->skip;
 COMMENT_BLOCK: '/*' .*? '*/' -> skip;

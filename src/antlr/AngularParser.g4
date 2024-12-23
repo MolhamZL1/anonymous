@@ -5,6 +5,9 @@ options { tokenVocab=AngularLexer; }
 program
     : (importStatement | componentDeclaration | classDeclaration | functionDeclaration | statement)* EOF;
 
+// Modifier Rules
+modifier : PUBLIC | PRIVATE | PROTECTED | READONLY | STATIC | ABSTRACT | FINAL | ASYNC|EXPORT;
+
 importStatement
     : IMPORT (IDENTIFIER | STAR AS IDENTIFIER | LCURLY IDENTIFIER (COMMA IDENTIFIER)* RCURLY) FROM String SEMI;
 
@@ -12,25 +15,28 @@ componentDeclaration
     : COMPONENT LPAREN objectLiteral RPAREN ;
 
 classDeclaration
-    :(EXPORT)* CLASS IDENTIFIER (EXTENDS IDENTIFIER)? LCURLY (classMember)* RCURLY;
+    :(modifier)* CLASS IDENTIFIER (EXTENDS IDENTIFIER)? LCURLY (classMember)* RCURLY;
 
 classMember
     : inputDeclaration
     | outputDeclaration
     | methodDeclaration
-    | propertyDeclaration;
+    | propertyDeclaration
+    | constructorDecleration;
 
+constructorDecleration:CONSTRUCTOR LPAREN (parameter (COMMA parameter)*)? RPAREN block;
 inputDeclaration
     : INPUT LPAREN String RPAREN IDENTIFIER COLON IDENTIFIER SEMI;
 
 outputDeclaration
-    : OUTPUT LPAREN String RPAREN IDENTIFIER COLON IDENTIFIER SEMI;
+    : OUTPUT LPAREN (literal)? RPAREN IDENTIFIER (EQUAL expression)? SEMI;
 
 methodDeclaration
-    : IDENTIFIER LPAREN (parameter (COMMA parameter)*)? RPAREN COLON IDENTIFIER? block;
+    :(modifier)* IDENTIFIER LPAREN (parameter (COMMA parameter)*)? RPAREN (COLON IDENTIFIER?)? block
+    |shortMethod;
 
 propertyDeclaration
-    : IDENTIFIER COLON IDENTIFIER (EQUAL expression)? SEMI;
+    :(modifier)* IDENTIFIER COLON IDENTIFIER (EQUAL expression)? SEMI;
 
 parameter
     : IDENTIFIER COLON IDENTIFIER;
@@ -47,14 +53,17 @@ statement
     | forStatement
     | whileStatement
     | expressionStatement
-    | returnStatement;
+    ;
 
 variableDeclaration
-    : (CONST | LET | VAR) IDENTIFIER (COLON IDENTIFIER)? (EQUAL expression)? SEMI;
+    :(modifier)* (CONST | LET | VAR) IDENTIFIER (COLON IDENTIFIER)? (EQUAL expression)? SEMI;
 
 ifStatement
-    : IF LPAREN expression RPAREN block (ELSE block)?;
-
+    : IF LPAREN expression (compersion expression)? RPAREN block (ELSEIF LPAREN expression (compersion expression)? RPAREN block)* (ELSE block)?
+    |shortIf;
+shortIf:LPAREN? expression (compersion expression)? RPAREN? ARROW expression|(QUESITIONMARK expression (LPAREN? expression (compersion expression)? RPAREN? QUESITIONMARK expression)* COLON expression) ;
+shortMethod:LPAREN (parameter (COMMA parameter)*)? RPAREN ARROW statement;
+shortFunction:;
 forStatement
     : FOR LPAREN (variableDeclaration | expression)? SEMI expression? SEMI expression? RPAREN block;
 
@@ -67,24 +76,34 @@ expressionStatement
 returnStatement
     : RETURN expression? SEMI;
 
-calledFunction
-    :IDENTIFIER LPAREN (expression (COMMA expression)*)? RPAREN;
-
 
 expression
     : literal
     | IDENTIFIER
-    | calledFunction
+    | list
+    | callingMethod
+    | objectDecleration
+    | expression DOT expression
+    | expression list|shortMethod
     | expression operator expression;
 
+    callingMethod
+    :IDENTIFIER LPAREN (expression (COMMA expression)*)? RPAREN;
+
+    list:LSBRACKET ((literal|IDENTIFIER) (COMMA (literal|IDENTIFIER))*)? RSBRACKET;
+
 operator
-    : EQUAL | PLUS | MINUS | STAR | DIVIDE | AND | OR;
+    : EQUAL | PLUS | MINUS | STAR | DIVIDE |PLUS EQUAL|MINUS EQUAL;
+    compersion:GREATER_THAN|LESS_THAN|GREATER_THAN_OR_EQUAL|LESS_THAN_OR_EQUAL|NOT_EQUAL|EQUAL_TO| AND | OR|EQUAL_TO3|NOT_EQUAL2;
 
 literal
-    : Integer | Float | String | Boolean | Null | Undefined;
+    : Integer | Float | String | Boolean | Null | Undefined|THIS;
 
 objectLiteral
     : LCURLY (property (COMMA property)*)? RCURLY;
 
 property
-    : IDENTIFIER COLON expression;
+    :IDENTIFIER COLON expression;
+    objectDecleration
+    :NEW IDENTIFIER (LESS_THAN IDENTIFIER* GREATER_THAN)?  LPAREN (expression (COMMA expression)*)? RPAREN ;
+
