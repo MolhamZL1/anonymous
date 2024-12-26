@@ -1,7 +1,7 @@
 lexer grammar AngularLexer;
 
 // Keywords and Operators
-WS : [ \t\r\n]+ -> skip;
+
 IF: 'if';
 ELSEIF: 'else' WS 'if';
 ELSE: 'else';
@@ -25,17 +25,27 @@ CONSTRUCTOR:'constructor';
 VAR: 'var';
 CLASS:'class';
 IMPORT: 'import';
+IMPORTS: 'imports';
+
 EXPORT: 'export';
 AS: 'as';
 FROM: 'from';
+NEW:'new';
+THIS:'this';
+IMPLEMENTS:'implements';
+//angular
 INPUT: '@Input';
 OUTPUT: '@Output';
 VIEWCHILD: '@ViewChild';
 COMPONENT: '@Component';
 NGONINIT: 'ngOnInit';
 NGONCHANGES: 'ngOnChanges';
-NEW:'new';
-THIS:'this';
+SELECTOR:'selector';
+STANDALONE:'standalone';
+STYLEURL:'styleUrl';
+TEMPLATEURL:'templateUrl';
+TEMPLATE:'template';
+
 
 //MODIFIRES
 PUBLIC : 'public';
@@ -94,3 +104,4 @@ IDENTIFIER: [a-zA-Z_$][a-zA-Z0-9_$]*;
 // Comments
 SINGLE_LINE_COMMENT: '//' ~[\r\n]* ->skip;
 COMMENT_BLOCK: '/*' .*? '*/' -> skip;
+WS : [ \t\r\n]+ -> skip;

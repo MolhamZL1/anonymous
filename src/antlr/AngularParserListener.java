@@ -108,25 +108,15 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitMethodDeclaration(AngularParser.MethodDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AngularParser#propertyDeclaration}.
+	 * Enter a parse tree produced by {@link AngularParser#shortMethod}.
 	 * @param ctx the parse tree
 	 */
-	void enterPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx);
+	void enterShortMethod(AngularParser.ShortMethodContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AngularParser#propertyDeclaration}.
+	 * Exit a parse tree produced by {@link AngularParser#shortMethod}.
 	 * @param ctx the parse tree
 	 */
-	void exitPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AngularParser#parameter}.
-	 * @param ctx the parse tree
-	 */
-	void enterParameter(AngularParser.ParameterContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AngularParser#parameter}.
-	 * @param ctx the parse tree
-	 */
-	void exitParameter(AngularParser.ParameterContext ctx);
+	void exitShortMethod(AngularParser.ShortMethodContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AngularParser#functionDeclaration}.
 	 * @param ctx the parse tree
@@ -138,6 +128,16 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitFunctionDeclaration(AngularParser.FunctionDeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AngularParser#shortFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterShortFunction(AngularParser.ShortFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#shortFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitShortFunction(AngularParser.ShortFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AngularParser#block}.
 	 * @param ctx the parse tree
 	 */
@@ -148,15 +148,35 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitBlock(AngularParser.BlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AngularParser#statement}.
+	 * Enter a parse tree produced by {@link AngularParser#parameter}.
 	 * @param ctx the parse tree
 	 */
-	void enterStatement(AngularParser.StatementContext ctx);
+	void enterParameter(AngularParser.ParameterContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AngularParser#statement}.
+	 * Exit a parse tree produced by {@link AngularParser#parameter}.
 	 * @param ctx the parse tree
 	 */
-	void exitStatement(AngularParser.StatementContext ctx);
+	void exitParameter(AngularParser.ParameterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#parameterList}.
+	 * @param ctx the parse tree
+	 */
+	void enterParameterList(AngularParser.ParameterListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#parameterList}.
+	 * @param ctx the parse tree
+	 */
+	void exitParameterList(AngularParser.ParameterListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#propertyDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#propertyDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AngularParser#variableDeclaration}.
 	 * @param ctx the parse tree
@@ -168,6 +188,16 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitVariableDeclaration(AngularParser.VariableDeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AngularParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterType(AngularParser.TypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitType(AngularParser.TypeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AngularParser#ifStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -177,6 +207,26 @@ public interface AngularParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIfStatement(AngularParser.IfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#shortIf}.
+	 * @param ctx the parse tree
+	 */
+	void enterShortIf(AngularParser.ShortIfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#shortIf}.
+	 * @param ctx the parse tree
+	 */
+	void exitShortIf(AngularParser.ShortIfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#arrowIf}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrowIf(AngularParser.ArrowIfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#arrowIf}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrowIf(AngularParser.ArrowIfContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AngularParser#forStatement}.
 	 * @param ctx the parse tree
@@ -218,6 +268,16 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitReturnStatement(AngularParser.ReturnStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AngularParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(AngularParser.StatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(AngularParser.StatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AngularParser#expression}.
 	 * @param ctx the parse tree
 	 */
@@ -238,6 +298,16 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitCallingMethod(AngularParser.CallingMethodContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AngularParser#list}.
+	 * @param ctx the parse tree
+	 */
+	void enterList(AngularParser.ListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#list}.
+	 * @param ctx the parse tree
+	 */
+	void exitList(AngularParser.ListContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AngularParser#operator}.
 	 * @param ctx the parse tree
 	 */
@@ -247,6 +317,16 @@ public interface AngularParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOperator(AngularParser.OperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#compersion}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompersion(AngularParser.CompersionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#compersion}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompersion(AngularParser.CompersionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AngularParser#literal}.
 	 * @param ctx the parse tree

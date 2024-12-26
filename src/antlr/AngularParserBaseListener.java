@@ -137,25 +137,13 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx) { }
+	@Override public void enterShortMethod(AngularParser.ShortMethodContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParameter(AngularParser.ParameterContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParameter(AngularParser.ParameterContext ctx) { }
+	@Override public void exitShortMethod(AngularParser.ShortMethodContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -173,6 +161,18 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterShortFunction(AngularParser.ShortFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitShortFunction(AngularParser.ShortFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBlock(AngularParser.BlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -185,13 +185,37 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatement(AngularParser.StatementContext ctx) { }
+	@Override public void enterParameter(AngularParser.ParameterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatement(AngularParser.StatementContext ctx) { }
+	@Override public void exitParameter(AngularParser.ParameterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParameterList(AngularParser.ParameterListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParameterList(AngularParser.ParameterListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -209,6 +233,18 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterType(AngularParser.TypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitType(AngularParser.TypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIfStatement(AngularParser.IfStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -216,6 +252,30 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIfStatement(AngularParser.IfStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterShortIf(AngularParser.ShortIfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitShortIf(AngularParser.ShortIfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrowIf(AngularParser.ArrowIfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrowIf(AngularParser.ArrowIfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -269,6 +329,18 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStatement(AngularParser.StatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatement(AngularParser.StatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExpression(AngularParser.ExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -293,6 +365,18 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterList(AngularParser.ListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitList(AngularParser.ListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterOperator(AngularParser.OperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -300,6 +384,18 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitOperator(AngularParser.OperatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompersion(AngularParser.CompersionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompersion(AngularParser.CompersionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
