@@ -5,21 +5,45 @@ options { tokenVocab=AngularLexer; }
 program
     : (importStatement | componentDeclaration | classDeclaration | functionDeclaration | statement)* EOF;
 
-// Modifier Rules
+    importStatement
+        : IMPORT (IDENTIFIER | STAR AS IDENTIFIER | LCURLY IDENTIFIER (COMMA IDENTIFIER)* RCURLY) FROM String eos;
+
+        componentDeclaration
+            :COMPONENT LPAREN LCURLY (selector|standalone|imports|url|tamplate)
+            (COMMA(selector|standalone|imports|url|tamplate))* RCURLY RPAREN ;
+
+        selector:SELECTOR COLON String;
+
+        standalone:STANDALONE COLON Boolean;
+
+        imports:IMPORTS COLON LSBRACKET (IDENTIFIER (COMMA IDENTIFIER)*)? RSBRACKET;
+
+        url:(TEMPLATEURL|STYLEURL) COLON String;
+
+        tamplate: TEMPLATE COLON html;
+
+        html:;
+
+         functionDeclaration:
+         FUNCTION? IDENTIFIER parameterList block;
+
+         methodDeclaration:
+         (modifier)? IDENTIFIER parameterList (COLON IDENTIFIER?)? block
+         |arrowMethod;
+
+          arrowMethod:
+          modifier? IDENTIFIER? parameterList ARROW LCURLY? statement* RCURLY?;
+
+          block:
+          LCURLY statement* returnStatement? RCURLY;
+
+          parameterList:
+          LPAREN (parameter (COMMA parameter)*)? RPAREN;
+
+          parameter:
+          IDENTIFIER COLON IDENTIFIER;
+
 modifier : PUBLIC | PRIVATE | PROTECTED | READONLY | STATIC | ABSTRACT | FINAL | ASYNC|EXPORT;
-
-importStatement
-    : IMPORT (IDENTIFIER | STAR AS IDENTIFIER | LCURLY IDENTIFIER (COMMA IDENTIFIER)* RCURLY) FROM String SEMI;
-
-componentDeclaration
-    : COMPONENT LPAREN LCURLY componentparameters* RCURLY RPAREN ;
-    componentparameters: ((selector|standalone|imports|url|tamplate) COMMA)|(selector|standalone|imports|url|tamplate) ;
-selector:SELECTOR COLON String;
-standalone:STANDALONE COLON Boolean;
-imports:IMPORTS COLON LSBRACKET (IDENTIFIER (COMMA IDENTIFIER)*)? RSBRACKET;
-url:(TEMPLATEURL|STYLEURL) COLON String;
-tamplate: TEMPLATE COLON html;
-html:;
 
 classDeclaration
     :(modifier)? CLASS IDENTIFIER ((EXTENDS| IMPLEMENTS) IDENTIFIER)? LCURLY (classMember)* RCURLY;
@@ -28,11 +52,11 @@ classMember
     : inputDeclaration
     | outputDeclaration
     | methodDeclaration
-    | propertyDeclaration|objectDecleration
+    | propertyDeclaration
+    | variableDeclaration
+    | objectDecleration
     | constructorDecleration
-    | ngOn
-
-    ;
+    | ngOn;
 
 ngOn
 :(NGONINIT|NGONCHANGES) parameterList (COLON IDENTIFIER?)? block;
@@ -40,43 +64,72 @@ ngOn
 constructorDecleration
 :CONSTRUCTOR parameterList block;
 
-
-
 inputDeclaration
-    : INPUT LPAREN (literal)? RPAREN expression? SEMI;
+    : INPUT LPAREN (literal)? RPAREN property;
 
 outputDeclaration
-    : OUTPUT LPAREN (literal)? RPAREN expression? SEMI;
+    : OUTPUT LPAREN (literal)? RPAREN objectDecleration;
 
-methodDeclaration
-    :(modifier)? IDENTIFIER parameterList (COLON IDENTIFIER?)? block
-    |shortMethod;
+variableDeclaration
+    :(modifier? type)? IDENTIFIER (COLON expression)?  (EQUAL expression)? (AS IDENTIFIER)? eos?;
 
-    shortMethod:IDENTIFIER parameterList ARROW LCURLY? statement* RCURLY?;
+type:(CONST | LET | VAR);
 
-    functionDeclaration
-        : FUNCTION IDENTIFIER parameterList block
-        |shortFunction;
+propertyDeclaration:(modifier)? property (EQUAL expression)? eos;
 
-        shortFunction:parameterList ARROW (LCURLY statement* RCURLY)?;
+property:(IDENTIFIER COLON expression)|imports;
 
-        block
-            : LCURLY statement* RCURLY;
+objectDecleration:
+(property|objectName) EQUAL objectInit eos?;
 
-            parameter
-                : IDENTIFIER COLON IDENTIFIER;
+objectName:
+IDENTIFIER  objectType? ;
 
-            parameterList
-            :LPAREN (parameter (COMMA parameter)*)? RPAREN;
+objectInit:
+NEW IDENTIFIER objectType?  LPAREN (expression (COMMA expression)*)? RPAREN;
 
+objectType:
+LESS_THAN IDENTIFIER list? (COMMA IDENTIFIER list?)* GREATER_THAN
+;
 
+objectLiteral:LCURLY (property (COMMA property)*)? COMMA? RCURLY;
+
+literal
+    : (PLUS | MINUS)? Integer |(PLUS | MINUS)? Float | String | Boolean | Null | Undefined|THIS;
+
+    statement
+        : variableDeclaration
+        | objectDecleration
+        | ifStatement
+        | forStatement
+        | whileStatement
+        | expressionStatement;
+
+        expression
+            : expression list
+            | objectLiteral
+            | objectDecleration
+            | objectName
+            | arrowMethod
+            | expression EQUAL (dataStructure|literal)
+            | THIS
+            | IDENTIFIER
+            | literal
+            | callingMethod
+            | expression DOT expression
+            | expression compersion expression
+            | expression operator expression;
 
 
 ifStatement
     : IF LPAREN expression (compersion expression)? RPAREN block (ELSEIF LPAREN expression (compersion expression)? RPAREN block)* (ELSE block)?
-    |shortIf|arrowIf;
+    |shortIf
+    |arrowIf;
+
 shortIf:LPAREN? expression (compersion expression)? RPAREN? QUESITIONMARK LPAREN?  statement RPAREN?  (COLON LPAREN? expression (compersion expression)? RPAREN? QUESITIONMARK LPAREN?  statement RPAREN? )* COLON LPAREN?  statement RPAREN? ;
+
 arrowIf:LPAREN? expression (compersion expression)? RPAREN? ARROW expression;
+
 forStatement
     : FOR LPAREN (variableDeclaration | expression)? SEMI expression? SEMI expression? RPAREN block;
 
@@ -84,62 +137,34 @@ whileStatement
     : WHILE LPAREN expression RPAREN block;
 
 expressionStatement
-    : expression SEMI?;
+    : expression eos;
 
 returnStatement
-    : RETURN expression? SEMI;
+    : RETURN expression? eos;
 
-statement
-    : variableDeclaration
-    |objectDecleration
-    | ifStatement
+gettingValueLeft: THIS (DOT (callingMethod|IDENTIFIER))*
+                 | IDENTIFIER  (DOT (callingMethod|IDENTIFIER))*;
 
-    | forStatement
-    | whileStatement
-    |returnStatement
-    | expressionStatement
-    ;
-expression
-    :
+settingValueLeft: THIS (DOT (callingMethod|IDENTIFIER))*
+                 | IDENTIFIER  (DOT (callingMethod|IDENTIFIER))*;
 
-      expression DOT expression
-    | expression list|objectDecleration
-    | shortMethod
-    | expression compersion expression
-    | expression operator expression
-    |literal
-             | IDENTIFIER
-             | list
-             |callingMethod
-    ;
 
     callingMethod
-    :IDENTIFIER LPAREN (expression (COMMA expression)*)? RPAREN;
+    :((IDENTIFIER|CATCH) LPAREN (expression (COMMA expression)*)? RPAREN) ((DOT (callingMethod|IDENTIFIER))|dataStructure)*;
 
-    list:LSBRACKET ((literal|IDENTIFIER) (COMMA (literal|IDENTIFIER))*)? RSBRACKET;
+    dataStructure:list|map;
+
+    itemsStructures:(literal|IDENTIFIER|list|map|callingMethod);
+
+map:LCURLY ((itemsStructures COLON itemsStructures) (COMMA (itemsStructures COLON itemsStructures))*)? COMMA? RCURLY;
+
+list:LSBRACKET (itemsStructures (COMMA itemsStructures)*)? COMMA? RSBRACKET;
 
 operator
     : EQUAL | PLUS | MINUS | STAR | DIVIDE |PLUS EQUAL|MINUS EQUAL;
 
     compersion
     :GREATER_THAN|LESS_THAN|GREATER_THAN_OR_EQUAL|LESS_THAN_OR_EQUAL|NOT_EQUAL|EQUAL_TO| AND | OR|EQUAL_TO3|NOT_EQUAL2;
-
-literal
-    : (PLUS | MINUS)? Integer |(PLUS | MINUS)? Float | String | Boolean | Null | Undefined|THIS;
-
-objectLiteral : LCURLY (property (COMMA property)*)? RCURLY;
+    eos:SEMI?;
 
 
-                 objectDecleration
-                 :property|objectName EQUAL objectInit SEMI;
-objectName:IDENTIFIER (LESS_THAN IDENTIFIER (COMMA IDENTIFIER)* GREATER_THAN)?;
-objectInit:NEW IDENTIFIER (LESS_THAN IDENTIFIER* GREATER_THAN)?  LPAREN (expression (COMMA expression)*)? RPAREN;
-propertyDeclaration
-    :(modifier)? property (EQUAL expression)? SEMI;
-     property
-                     :IDENTIFIER COLON expression;
-variableDeclaration
-    :(modifier)? type IDENTIFIER (COLON expression)? (EQUAL expression)? SEMI?;
-
-    type:
-    (CONST | LET | VAR);
