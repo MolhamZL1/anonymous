@@ -28,6 +28,16 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitImportStatement(AngularParser.ImportStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AngularParser#importSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterImportSpecifier(AngularParser.ImportSpecifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#importSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitImportSpecifier(AngularParser.ImportSpecifierContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AngularParser#componentDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -418,26 +428,6 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitReturnStatement(AngularParser.ReturnStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AngularParser#gettingValueLeft}.
-	 * @param ctx the parse tree
-	 */
-	void enterGettingValueLeft(AngularParser.GettingValueLeftContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AngularParser#gettingValueLeft}.
-	 * @param ctx the parse tree
-	 */
-	void exitGettingValueLeft(AngularParser.GettingValueLeftContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AngularParser#settingValueRight}.
-	 * @param ctx the parse tree
-	 */
-	void enterSettingValueRight(AngularParser.SettingValueRightContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AngularParser#settingValueRight}.
-	 * @param ctx the parse tree
-	 */
-	void exitSettingValueRight(AngularParser.SettingValueRightContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link AngularParser#callingMethod}.
 	 * @param ctx the parse tree
 	 */
@@ -507,4 +497,14 @@ public interface AngularParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCompersion(AngularParser.CompersionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#eos}.
+	 * @param ctx the parse tree
+	 */
+	void enterEos(AngularParser.EosContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#eos}.
+	 * @param ctx the parse tree
+	 */
+	void exitEos(AngularParser.EosContext ctx);
 }

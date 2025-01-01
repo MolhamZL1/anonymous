@@ -6,20 +6,19 @@ import java.util.List;
 public class SymbolTable {
     List<Row> rows = new ArrayList<>();
 
-    public List<Row> getRows() {
 
-        return rows;
+
+    public void addRow(String type,String value ) {
+Row row=new Row(type,value);
+        this.rows.add(row);
     }
-
-    public void setRows(List<Row> rows) {
-
-        this.rows = rows;
-    }
-    public void printyy() {
+    public void print() {
+        System.out.println("------------------------------------------------------------------------------");
         System.out.println("Type\t\t\t\t\t\t\t\tValue");
         System.out.println("------------------------------------------------------------------------------");
 
         for (int i = 0; i < rows.size(); i++) {
+
             if (rows.get(i) != null) {
                 String type = rows.get(i).getType();
                 String value = rows.get(i).getValue();
@@ -32,7 +31,6 @@ public class SymbolTable {
                 System.out.println(formattedType +"\t\t\t"+'|'+"\t\t\t"+ formattedValue);
             }
         }
-        System.out.println("------------------------------------------------------------------------------");
-        System.out.println();
+
     }
 }

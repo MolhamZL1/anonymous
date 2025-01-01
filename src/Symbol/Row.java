@@ -4,6 +4,11 @@ public class Row {
     String type;
     String value;
 
+    public Row(String type, String value) {
+        this.type = type;
+        this.value = value;
+    }
+
     public String getType() {
 
         return type;

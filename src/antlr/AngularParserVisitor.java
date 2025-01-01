@@ -23,6 +23,12 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitImportStatement(AngularParser.ImportStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AngularParser#importSpecifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImportSpecifier(AngularParser.ImportSpecifierContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AngularParser#componentDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -257,18 +263,6 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReturnStatement(AngularParser.ReturnStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AngularParser#gettingValueLeft}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitGettingValueLeft(AngularParser.GettingValueLeftContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AngularParser#settingValueRight}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSettingValueRight(AngularParser.SettingValueRightContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link AngularParser#callingMethod}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -310,4 +304,10 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCompersion(AngularParser.CompersionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#eos}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEos(AngularParser.EosContext ctx);
 }
