@@ -7,6 +7,9 @@ import antlr.AngularParserBaseVisitor;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BaseVisitor extends AngularParserBaseVisitor {
     SymbolTable symbolTable = new SymbolTable();
 
@@ -132,9 +135,63 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     }
 
     @Override
-    public Object visitFunctionDeclaration(AngularParser.FunctionDeclarationContext ctx) {
-        return super.visitFunctionDeclaration(ctx);
+    public ASTNode visitFunctionDeclaration(AngularParser.FunctionDeclarationContext ctx) {
+        String name = null;
+        ParameterList parameters =null;
+        String returnType = null;
+        Block block = null;
+
+        // Extract function name if present
+        if (ctx.IDENTIFIER(0) != null) {
+            name = ctx.IDENTIFIER(0).getText();
+        }
+
+        // Visit parameter list
+        if (ctx.parameterList() != null) {
+            parameters =(ParameterList) visit(ctx.parameterList());
+        }
+
+        // Extract return type if present
+        if (ctx.COLON() != null && ctx.IDENTIFIER(1) != null) {
+            returnType = ctx.IDENTIFIER(1).getText();
+        }
+
+        // Visit block
+        if (ctx.block() != null) {
+            block = (Block) visit(ctx.block());
+        }
+
+        return new FunctionDeclaration(name, parameters, returnType, block);
     }
+    @Override
+    public Object visitBlock(AngularParser.BlockContext ctx) {
+        return super.visitBlock(ctx);
+    }
+
+    @Override
+    public ASTNode visitParameterList(AngularParser.ParameterListContext ctx) {
+        ParameterList parameterList = new ParameterList();
+
+        // Iterate through all parameter contexts
+        for (AngularParser.ParameterContext paramCtx : ctx.parameter()) {
+            // Visit each parameter and cast to Parameter
+            Parameter parameter = (Parameter) visit(paramCtx);
+            if (parameter != null) {
+                parameterList.addParameter(parameter);
+            }
+        }
+
+        return parameterList;
+    }
+
+    @Override
+    public ASTNode visitParameter(AngularParser.ParameterContext ctx) {
+        // Create a Parameter with the name from the context
+        String paramName = ctx.IDENTIFIER(0).getText();
+        return new Parameter(paramName);
+    }
+
+
 
     @Override
     public Object visitMethodDeclaration(AngularParser.MethodDeclarationContext ctx) {
@@ -146,20 +203,6 @@ public class BaseVisitor extends AngularParserBaseVisitor {
         return super.visitArrowMethod(ctx);
     }
 
-    @Override
-    public Object visitBlock(AngularParser.BlockContext ctx) {
-        return super.visitBlock(ctx);
-    }
-
-    @Override
-    public Object visitParameterList(AngularParser.ParameterListContext ctx) {
-        return super.visitParameterList(ctx);
-    }
-
-    @Override
-    public Object visitParameter(AngularParser.ParameterContext ctx) {
-        return super.visitParameter(ctx);
-    }
 
     @Override
     public Object visitModifier(AngularParser.ModifierContext ctx) {
