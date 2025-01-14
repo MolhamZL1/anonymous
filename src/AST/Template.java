@@ -14,7 +14,7 @@ public class Template implements ASTNode {
     @Override
     public String toString() {
         return "Template{" +
-                 template+"molham"+
+                 template+
                 '}';
     }
 }
