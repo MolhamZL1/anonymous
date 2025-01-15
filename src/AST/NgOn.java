@@ -1,24 +1,40 @@
 package AST;
 
-public class NgOn implements ASTNode {
-    private String lifecycleHook; // The type of lifecycle hook (e.g., ngOnInit, ngOnChanges)
-    private ParameterList parameters; // Parameters for the method
-    private String returnType; // Optional return type
-    private Block block; // The body of the method
+import java.util.ArrayList;
+import java.util.List;
 
-    public NgOn(String lifecycleHook, ParameterList parameters, String returnType, Block block) {
-        this.lifecycleHook = lifecycleHook;
+public class NgOn implements ASTNode {
+    private String type; // Either NGONINIT or NGONCHANGES
+    private ParameterList parameters; // List of parameters
+    private String returnType; // Optional return type
+    private Block block; // Block content
+
+    public NgOn(String type,ParameterList parameters, String returnType, Block block) {
+        this.type = type;
         this.parameters = parameters;
         this.returnType = returnType;
         this.block = block;
     }
 
+    public String getType() {
+        return type;
+    }
+
+
+    public String getReturnType() {
+        return returnType;
+    }
+
+    public Block getBlock() {
+        return block;
+    }
+
     @Override
     public String toString() {
         return "NgOn{" +
-                "lifecycleHook='" + lifecycleHook + '\'' +
+                "type='" + type + '\'' +
                 ", parameters=" + parameters +
-                ", returnType='" + returnType + '\'' +
+                ", returnType='" + (returnType != null ? returnType : "void") + '\'' +
                 ", block=" + block +
                 '}';
     }

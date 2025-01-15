@@ -3,21 +3,25 @@ package AST;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParameterList implements ASTNode{
-    List<Parameter> parameters;
+public class ParameterList implements ASTNode {
+    private List<Parameter> parameters; // List of parameters
 
-    public ParameterList(){
-        parameters = new ArrayList<>();
+    public ParameterList() {
+        this.parameters = new ArrayList<>();
     }
 
-   public void addParameter(Parameter parameter){
-        parameters.add(parameter);
+    public void addParameter(Parameter parameter) {
+        this.parameters.add(parameter);
+    }
 
+    public List<Parameter> getParameters() {
+        return parameters;
     }
 
     @Override
     public String toString() {
-        return "ParameterList" +
-                  parameters;
+        return "ParameterList{" +
+                "parameters=" + parameters +
+                '}';
     }
 }

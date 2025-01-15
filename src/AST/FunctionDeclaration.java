@@ -1,5 +1,6 @@
 package AST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionDeclaration implements ASTNode {
@@ -8,9 +9,9 @@ public class FunctionDeclaration implements ASTNode {
     private String returnType; // Return type (IDENTIFIER)
     private Block block; // Block of the function
 
-    public FunctionDeclaration(String name, ParameterList parameters, String returnType, Block block) {
+    public FunctionDeclaration(String name,ParameterList parameters,  String returnType, Block block) {
         this.name = name;
-        this.parameters = parameters;
+        this.parameters =parameters;
         this.returnType = returnType;
         this.block = block;
     }
@@ -19,9 +20,7 @@ public class FunctionDeclaration implements ASTNode {
         return name;
     }
 
-    public ParameterList getParameters() {
-        return parameters;
-    }
+
 
     public String getReturnType() {
         return returnType;

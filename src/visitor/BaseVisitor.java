@@ -137,7 +137,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     @Override
     public ASTNode visitFunctionDeclaration(AngularParser.FunctionDeclarationContext ctx) {
         String name = null;
-        ParameterList parameters =null;
+
         String returnType = null;
         Block block = null;
 
@@ -147,10 +147,9 @@ public class BaseVisitor extends AngularParserBaseVisitor {
             name = ctx.IDENTIFIER(0).getText();
         }
 
-        // Visit parameter list
-        if (ctx.parameterList() != null) {
-            parameters =(ParameterList) visit(ctx.parameterList());
-        }
+        // Extract and collect parameters directly into a List
+
+        ParameterList parameters = (ParameterList) visit(ctx.parameterList());
 
         // Extract return type if present
         if (ctx.COLON() != null && ctx.IDENTIFIER(1) != null) {
@@ -161,8 +160,10 @@ public class BaseVisitor extends AngularParserBaseVisitor {
         if (ctx.block() != null) {
             block = (Block) visit(ctx.block());
         }
+        FunctionDeclaration functionDeclaration =  new FunctionDeclaration(name, parameters, returnType, block);
+        // Add the parameters directly to the FunctionDeclaration
 
-        return new FunctionDeclaration(name, parameters, returnType, block);
+        return functionDeclaration;
     }
     @Override
     public ASTNode visitBlock(AngularParser.BlockContext ctx) {
@@ -182,22 +183,22 @@ public class BaseVisitor extends AngularParserBaseVisitor {
         return block;
     }
 
-
     @Override
     public ASTNode visitParameterList(AngularParser.ParameterListContext ctx) {
+        // Create a new ParameterList instance
         ParameterList parameterList = new ParameterList();
 
-        // Iterate through all parameter contexts
-        for (AngularParser.ParameterContext paramCtx : ctx.parameter()) {
-            // Visit each parameter and cast to Parameter
-            Parameter parameter = (Parameter) visit(paramCtx);
-            if (parameter != null) {
-                parameterList.addParameter(parameter);
+        // Visit each parameter and add to the parameter list
+        if (ctx.parameter() != null) {
+            for (AngularParser.ParameterContext paramCtx : ctx.parameter()) {
+                Parameter parameter = (Parameter) visit(paramCtx); // Visit each parameter
+                parameterList.addParameter(parameter); // Add to the list
             }
         }
 
         return parameterList;
     }
+
 
     @Override
     public ASTNode visitParameter(AngularParser.ParameterContext ctx) {
@@ -214,8 +215,31 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     }
 
     @Override
-    public Object visitArrowMethod(AngularParser.ArrowMethodContext ctx) {
-        return super.visitArrowMethod(ctx);
+    public ASTNode visitArrowMethod(AngularParser.ArrowMethodContext ctx) {
+        // Extract the optional modifier (e.g., PUBLIC, PRIVATE)
+        String modifier = ctx.modifier() != null ? ctx.modifier().getText() : null;
+
+        // Extract the optional method name (IDENTIFIER)
+        String name = ctx.IDENTIFIER() != null ? ctx.IDENTIFIER().get(0).getText() : null;
+
+        // Extract the parameter list
+        ParameterList parameters = (ParameterList) visit(ctx.parameterList());
+
+        // Extract the optional return type (IDENTIFIER)
+        String returnType = ctx.IDENTIFIER() != null ?ctx.IDENTIFIER().get(0).getText(): null;
+
+        // Create a new ArrowMethod instance
+        ArrowMethod arrowMethod = new ArrowMethod(modifier, name, parameters, returnType);
+
+        // Extract the statements inside the method block
+        if (ctx.statement() != null) {
+            for (AngularParser.StatementContext statementCtx : ctx.statement()) {
+                Statement statement = (Statement) visit(statementCtx);
+                arrowMethod.addStatement(statement);
+            }
+        }
+
+        return arrowMethod;
     }
 
 
@@ -271,24 +295,73 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     }
 
     @Override
-    public Object visitNgOn(AngularParser.NgOnContext ctx) {
-        return super.visitNgOn(ctx);
+    public ASTNode visitNgOn(AngularParser.NgOnContext ctx) {
+        // Determine the type (NGONINIT or NGONCHANGES)
+        String type = ctx.NGONINIT() != null ? ctx.NGONINIT().getText() : ctx.NGONCHANGES().getText();
+
+        // Extract and process parameters
+        ParameterList parameters = (ParameterList) visit(ctx.parameterList());
+
+        // Determine the return type if specified
+        String returnType = ctx.COLON() != null && ctx.IDENTIFIER() != null ? ctx.IDENTIFIER().getText() : null;
+
+        // Visit the block
+        Block block = ctx.block() != null ? (Block) visit(ctx.block()) : null;
+
+        // Create and populate the NgOn node
+        NgOn ngOn = new NgOn(type,parameters, returnType, block);
+
+
+        return ngOn;
     }
+
 
     @Override
     public Object visitConstructorDecleration(AngularParser.ConstructorDeclerationContext ctx) {
-        return super.visitConstructorDecleration(ctx);
+
+        ParameterList parameters = (ParameterList) visit(ctx.parameterList());
+            // Visit the block
+            Block block = ctx.block() != null ? (Block) visit(ctx.block()) : null;
+
+            // Create and populate the ConstructorDeclaration node
+            ConstructorDeclaration constructorDeclaration = new ConstructorDeclaration(parameters,block);
+
+
+            return constructorDeclaration;
+
+
     }
 
     @Override
-    public Object visitInputDeclaration(AngularParser.InputDeclarationContext ctx) {
-        return super.visitInputDeclaration(ctx);
+    public ASTNode visitInputDeclaration(AngularParser.InputDeclarationContext ctx) {
+        // Extract the literal if present
+        Literal literal = null;
+        if (ctx.literal() != null) {
+            literal = (Literal) visit(ctx.literal());
+        }
+        Property property = null;
+        if (ctx.property() != null) {
+            property = (Property) visit(ctx.property());
+        }
+
+        // Create the InputDeclaration node
+        InputDeclaration inputDeclaration = new InputDeclaration(literal, property);
+
+        return inputDeclaration;
     }
 
-    @Override
-    public Object visitOutputDeclaration(AngularParser.OutputDeclarationContext ctx) {
-        return super.visitOutputDeclaration(ctx);
-    }f
+
+    public ASTNode visitOutputDeclaration(AngularParser.OutputDeclarationContext ctx) {
+        // Extract the optional literal (expression)
+        Literal literal = ctx.literal() != null ? (Literal) visit(ctx.literal()) : null;
+
+        // Extract the object declaration
+        ObjectDeclaration objectDeclaration = (ObjectDeclaration) visit(ctx.objectDecleration());
+
+        return new OutputDeclaration(literal, objectDeclaration);
+    }
+
+
 
     @Override
     public Object visitVariableDeclaration(AngularParser.VariableDeclarationContext ctx) {
@@ -296,44 +369,127 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     }
 
     @Override
-    public Object visitType(AngularParser.TypeContext ctx) {
-        return super.visitType(ctx);
+    public ASTNode visitType(AngularParser.TypeContext ctx) {
+
+        String typeText = ctx.getText();
+        return new Type(typeText);
     }
 
     @Override
-    public Object visitPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx) {
-        return super.visitPropertyDeclaration(ctx);
+    public ASTNode visitPropertyDeclaration(AngularParser.PropertyDeclarationContext ctx) {
+        // Parse the modifier if present
+        Modifier modifier = ctx.modifier() != null ? (Modifier) visit(ctx.modifier()) : null;
+
+        // Visit the property
+        Property property = (Property) visit(ctx.property());
+
+        // Visit the assigned value if present
+        ASTNode value = ctx.expression() != null ?(ASTNode) visit(ctx.expression()) : null;
+
+        // Create and return the PropertyDeclaration AST node
+        return new PropertyDeclaration(modifier, property, value);
+    }
+
+
+    @Override
+    public ASTNode visitProperty(AngularParser.PropertyContext ctx) {
+        if (ctx.imports() != null) {
+            Imports imports = (Imports) visit(ctx.imports());
+            return new Property("imports", imports);
+        }
+
+        String name = ctx.IDENTIFIER().getText();
+        ASTNode value =(ASTNode) visit(ctx.expression());
+
+        return new Property(name, value);
+    }
+
+
+
+
+    @Override
+    public ASTNode visitObjectDecleration(AngularParser.ObjectDeclerationContext ctx) {
+        // Visit property or object name (could be a Property or ObjectName)
+        ASTNode propertyOrObjectName =(ASTNode) visit(ctx.property() != null ? ctx.property() : ctx.objectName());
+
+        // Visit object initialization
+        ObjectInit objectInit = (ObjectInit) visit(ctx.objectInit());
+
+
+
+        return new ObjectDeclaration(propertyOrObjectName, objectInit);
     }
 
     @Override
-    public Object visitProperty(AngularParser.PropertyContext ctx) {
-        return super.visitProperty(ctx);
+    public ASTNode visitObjectName(AngularParser.ObjectNameContext ctx) {
+        String name = ctx.IDENTIFIER().getText(); // Get the IDENTIFIER
+        ObjectType type = null;
+
+        // If objectType exists, visit it
+        if (ctx.objectType() != null) {
+            type = (ObjectType) visit(ctx.objectType());
+        }
+
+        return new ObjectName(name, type);
     }
 
     @Override
-    public Object visitObjectDecleration(AngularParser.ObjectDeclerationContext ctx) {
-        return super.visitObjectDecleration(ctx);
+    public ASTNode visitObjectInit(AngularParser.ObjectInitContext ctx) {
+        String className = ctx.IDENTIFIER().getText(); // Get the class name (IDENTIFIER)
+        ObjectType objectType = null;
+
+        // If objectType exists, visit and parse it
+        if (ctx.objectType() != null) {
+            objectType = (ObjectType) visit(ctx.objectType());
+        }
+
+        // Create ObjectInit instance
+        ObjectInit objectInit = new ObjectInit(className, objectType);
+
+        // Visit and add arguments (expressions) if present
+        if (ctx.expression() != null) {
+            for (AngularParser.ExpressionContext exprCtx : ctx.expression()) {
+                objectInit.addArgument((ASTNode) visit(exprCtx));
+            }
+        }
+
+        return objectInit;
     }
 
     @Override
-    public Object visitObjectName(AngularParser.ObjectNameContext ctx) {
-        return super.visitObjectName(ctx);
+    public ASTNode visitObjectType(AngularParser.ObjectTypeContext ctx) {
+        ObjectType objectType = new ObjectType();
+
+        // Iterate through each IDENTIFIER and optional list
+        for (int i = 0; i < ctx.IDENTIFIER().size(); i++) {
+            String identifier = ctx.IDENTIFIER(i).getText();
+
+            // Check if a list is present for this identifier
+            List<ASTNode> list = null;
+            if (ctx.list(i) != null) {
+                list = (List<ASTNode>) visit(ctx.list(i));
+            }
+
+            objectType.addType(identifier, list);
+        }
+
+        return objectType;
     }
 
-    @Override
-    public Object visitObjectInit(AngularParser.ObjectInitContext ctx) {
-        return super.visitObjectInit(ctx);
-    }
 
     @Override
-    public Object visitObjectType(AngularParser.ObjectTypeContext ctx) {
-        return super.visitObjectType(ctx);
+    public ASTNode visitObjectLiteral(AngularParser.ObjectLiteralContext ctx) {
+        ObjectLiteral objectLiteral = new ObjectLiteral();
+
+        // Visit each property in the object literal
+        for (AngularParser.PropertyContext propertyCtx : ctx.property()) {
+            Property property = (Property) visit(propertyCtx);
+            objectLiteral.addProperty(property);
+        }
+
+        return objectLiteral;
     }
 
-    @Override
-    public Object visitObjectLiteral(AngularParser.ObjectLiteralContext ctx) {
-        return super.visitObjectLiteral(ctx);
-    }
 
     @Override
     public ASTNode visitLiteral(AngularParser.LiteralContext ctx) {
