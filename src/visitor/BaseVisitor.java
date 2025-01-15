@@ -288,7 +288,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     @Override
     public Object visitOutputDeclaration(AngularParser.OutputDeclarationContext ctx) {
         return super.visitOutputDeclaration(ctx);
-    }
+    }f
 
     @Override
     public Object visitVariableDeclaration(AngularParser.VariableDeclarationContext ctx) {
