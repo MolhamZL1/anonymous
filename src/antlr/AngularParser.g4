@@ -78,7 +78,7 @@ outputDeclaration
     : OUTPUT LPAREN (literal)? RPAREN objectDecleration;
 
 variableDeclaration
-    :(modifier? type)? IDENTIFIER (COLON expression)?  (EQUAL expression)? (AS IDENTIFIER)? eos?;
+    :(modifier? type)? IDENTIFIER (COLON expression)?  (EQUAL expression)? (AS IDENTIFIER)? eos;
 
 type:(CONST | LET | VAR);
 
@@ -87,7 +87,7 @@ propertyDeclaration:(modifier)? property (EQUAL expression)? eos;
 property:(IDENTIFIER COLON expression)|imports;
 
 objectDecleration:
-(property|objectName) EQUAL objectInit eos?;
+(property|objectName) EQUAL objectInit eos;
 
 objectName:
 IDENTIFIER  objectType? ;
