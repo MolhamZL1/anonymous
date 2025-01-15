@@ -210,9 +210,26 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
 
     @Override
-    public Object visitMethodDeclaration(AngularParser.MethodDeclarationContext ctx) {
-        return super.visitMethodDeclaration(ctx);
+    public ASTNode visitMethodDeclaration(AngularParser.MethodDeclarationContext ctx) {
+
+
+        if (ctx.arrowMethod() != null) {
+            // Handle arrow method
+            return (ASTNode) visit(ctx.arrowMethod());
+        }
+
+        // Handle traditional method declaration
+        String name = ctx.IDENTIFIER().get(0).getText();
+        ParameterList parameterList = (ParameterList) visit(ctx.parameterList());
+        String returnType = ctx.COLON() != null && ctx.IDENTIFIER(1) != null
+                ? ctx.IDENTIFIER(1).getText()
+                : null;
+        Block block = (Block) visit(ctx.block());
+        Modifier modifier=(Modifier) visit(ctx.modifier());
+
+        return new MethodDeclaration(name, modifier, parameterList, returnType, block);
     }
+
 
     @Override
     public ASTNode visitArrowMethod(AngularParser.ArrowMethodContext ctx) {
@@ -290,9 +307,27 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
 
     @Override
-    public Object visitClassMember(AngularParser.ClassMemberContext ctx) {
-        return super.visitClassMember(ctx);
+    public ASTNode visitClassMember(AngularParser.ClassMemberContext ctx) {
+        if (ctx.inputDeclaration() != null) {
+            return new ClassMember((ASTNode)visit(ctx.inputDeclaration()));
+        } else if (ctx.outputDeclaration() != null) {
+            return new ClassMember((ASTNode)visit(ctx.outputDeclaration()));
+        } else if (ctx.methodDeclaration() != null) {
+            return new ClassMember((ASTNode)visit(ctx.methodDeclaration()));
+        } else if (ctx.propertyDeclaration() != null) {
+            return new ClassMember((ASTNode)visit(ctx.propertyDeclaration()));
+        } else if (ctx.variableDeclaration() != null) {
+            return new ClassMember((ASTNode)visit(ctx.variableDeclaration()));
+        } else if (ctx.objectDecleration() != null) {
+            return new ClassMember((ASTNode)visit(ctx.objectDecleration()));
+        } else if (ctx.constructorDecleration() != null) {
+            return new ClassMember((ASTNode)visit(ctx.constructorDecleration()));
+        } else if (ctx.ngOn() != null) {
+            return new ClassMember((ASTNode)visit(ctx.ngOn()));
+        }
+        return null;
     }
+
 
     @Override
     public ASTNode visitNgOn(AngularParser.NgOnContext ctx) {
@@ -364,9 +399,42 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
 
     @Override
-    public Object visitVariableDeclaration(AngularParser.VariableDeclarationContext ctx) {
-        return super.visitVariableDeclaration(ctx);
+    public ASTNode visitVariableDeclaration(AngularParser.VariableDeclarationContext ctx) {
+        String modifier = null;
+        String type = null;
+        String name = ctx.IDENTIFIER(0).getText();
+        Expression expression = null;
+        Expression initialValue = null;
+        String alias = null;
+
+        // Check for modifier (e.g., 'public', 'private', 'static')
+        if (ctx.modifier() != null) {
+            modifier = ctx.modifier().getText();
+        }
+
+        // Check for type (e.g., 'int', 'String')
+        if (ctx.type() != null) {
+            type = ctx.type().getText();
+        }
+
+        // Check if there's a type annotation (COLON expression)
+        if (ctx.expression(0) != null) {
+            expression = (Expression) visit(ctx.expression(0));
+        }
+
+        // Check for initial value (EQUAL expression)
+        if (ctx.expression(1) != null) {
+            initialValue = (Expression) visit(ctx.expression(1));
+        }
+
+        // Check for alias (AS IDENTIFIER)
+        if (ctx.AS() != null) {
+            alias = ctx.IDENTIFIER(1).getText();
+        }
+
+        return new VariableDeclaration(modifier, type, name, expression, initialValue, alias);
     }
+
 
     @Override
     public ASTNode visitType(AngularParser.TypeContext ctx) {
@@ -557,34 +625,139 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     }
 
     @Override
-    public Object visitIfStatement(AngularParser.IfStatementContext ctx) {
-        return super.visitIfStatement(ctx);
+    public ASTNode visitIfStatement(AngularParser.IfStatementContext ctx) {
+        // Visit the expression (condition) and block
+        Expression condition = (Expression) visit(ctx.expression());
+        Block block = (Block) visit(ctx.block());
+
+        // Create the IfStatement with condition and block
+        IfStatement ifStatement = new IfStatement(condition, block);
+
+        // Visit any else-if statements and add them
+        for (AngularParser.ElseIfStatmentContext elseIfCtx : ctx.elseIfStatment()) {
+            ElseIfStatement elseIfStatement = (ElseIfStatement) visit(elseIfCtx);
+            ifStatement.addElseIfStatement(elseIfStatement);
+        }
+
+        // Visit the else statement if it exists
+        if (ctx.elseStatment() != null) {
+            ElseStatement elseStatement = (ElseStatement) visit(ctx.elseStatment());
+            ifStatement.setElseStatement(elseStatement);
+        }
+
+        return ifStatement;
+    }
+
+
+    @Override
+    public ASTNode visitElseIfStatment(AngularParser.ElseIfStatmentContext ctx) {
+        // Visit the expression and block inside the elseif statement
+        Expression condition = (Expression) visit(ctx.expression());
+        Block block = (Block) visit(ctx.block());
+
+        // Return a new ElseIfStatement with the condition and block
+        return new ElseIfStatement(condition, block);
+    }
+
+
+    @Override
+    public ASTNode visitElseStatment(AngularParser.ElseStatmentContext ctx) {
+        Block block = (Block) visit(ctx.block());
+
+        // Return a new ElseStatement with the block
+        return new ElseStatement(block);
     }
 
     @Override
-    public Object visitShortIf(AngularParser.ShortIfContext ctx) {
-        return super.visitShortIf(ctx);
+    public ASTNode visitShortIf(AngularParser.ShortIfContext ctx) {
+        // Visit the expression and statement parts of the short if
+        Expression expression = (Expression) visit(ctx.expression());
+        Statement statement = (Statement) visit(ctx.statement());
+
+        // Create the ShortIf AST node
+        ShortIf shortIf = new ShortIf(expression, statement);
+
+        // Visit any short else if blocks
+        for (AngularParser.ShortElseIfContext shortElseIfCtx : ctx.shortElseIf()) {
+            ShortElseIf shortElseIf = (ShortElseIf) visit(shortElseIfCtx);
+            shortIf.addShortElseIf(shortElseIf);
+        }
+
+        // Visit the short else block
+        ShortElse shortElse = (ShortElse) visit(ctx.shortelse());
+        shortIf.setShortElse(shortElse);
+
+        return shortIf;
+    }
+
+
+    @Override
+    public ASTNode visitShortElseIf(AngularParser.ShortElseIfContext ctx) {
+        // Visit the expression and statement parts of short else if
+        Expression expression = (Expression) visit(ctx.expression());
+        Statement statement = (Statement) visit(ctx.statement());
+        return new ShortElseIf(expression, statement);
     }
 
     @Override
-    public Object visitArrowIf(AngularParser.ArrowIfContext ctx) {
-        return super.visitArrowIf(ctx);
+    public ASTNode visitShortelse(AngularParser.ShortelseContext ctx) {
+
+            // Visit the statement inside the short else and return it
+            Statement statement = (Statement) visit(ctx.statement());
+            return new ShortElse(statement);
+
+
     }
 
     @Override
-    public Object visitForStatement(AngularParser.ForStatementContext ctx) {
-        return super.visitForStatement(ctx);
+    public ASTNode visitArrowIf(AngularParser.ArrowIfContext ctx) {
+        // Visit the expression before the ARROW (condition)
+        Expression condition = (Expression) visit(ctx.expression(0));
+
+        // Visit the expression after the ARROW (result)
+        Expression result = (Expression) visit(ctx.expression(1));
+
+        // Create and return an ArrowIf object with the condition and result
+        return new ArrowIf(condition, result);
     }
 
-    @Override
-    public Object visitWhileStatement(AngularParser.WhileStatementContext ctx) {
-        return super.visitWhileStatement(ctx);
-    }
 
     @Override
-    public Object visitExpressionStatement(AngularParser.ExpressionStatementContext ctx) {
-        return super.visitExpressionStatement(ctx);
+    public ASTNode visitForStatement(AngularParser.ForStatementContext ctx) {
+        // Visit the components of the for-statement
+        ASTNode initializer = ctx.variableDeclaration() != null
+                ? (ASTNode) visit(ctx.variableDeclaration())
+                : ctx.expression(0) != null
+                ? (ASTNode) visit(ctx.expression(0))
+                : null;
+
+        ASTNode condition = ctx.expression(1) != null ? (ASTNode) visit(ctx.expression(1)) : null;
+        ASTNode increment = ctx.expression(2) != null ? (ASTNode) visit(ctx.expression(2)) : null;
+        Block block = (Block) visit(ctx.block());
+
+        // Create and return a ForStatement node
+        return new ForStatement(initializer, condition, increment, block);
     }
+
+
+    @Override
+    public ASTNode visitWhileStatement(AngularParser.WhileStatementContext ctx) {
+        // Visit the condition (expression) and the block
+        ASTNode condition = (ASTNode) visit(ctx.expression());
+        Block block = (Block) visit(ctx.block());
+
+        // Create and return a WhileStatement node
+        return new WhileStatement(condition, block);
+    }
+
+
+    @Override
+    public ASTNode visitExpressionStatement(AngularParser.ExpressionStatementContext ctx) {
+        // Visit the expression and wrap it in an ExpressionStatement
+        ASTNode expression = (ASTNode) visit(ctx.expression());
+        return new ExpressionStatement(expression);
+    }
+
 
     @Override
     public ASTNode visitReturnStatement(AngularParser.ReturnStatementContext ctx) {
@@ -599,9 +772,38 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     }
 
     @Override
-    public Object visitCallingMethod(AngularParser.CallingMethodContext ctx) {
-        return super.visitCallingMethod(ctx);
+    public ASTNode visitCallingMethod(AngularParser.CallingMethodContext ctx) {
+        // Extract method name (IDENTIFIER or CATCH)
+        String methodName = ctx.IDENTIFIER() != null ? ctx.IDENTIFIER(0).getText() : ctx.CATCH().getText();
+
+        // Create CallingMethod instance
+        CallingMethod callingMethod = new CallingMethod(methodName);
+
+        // Handle arguments
+        if (ctx.expression() != null) {
+            for (var exprCtx : ctx.expression()) {
+                callingMethod.addArgument((ASTNode) visit(exprCtx));
+            }
+        }
+
+        // Handle chained calls
+        if (ctx.DOT() != null) {
+            for (int i = 0; i < ctx.DOT().size(); i++) {
+                // Check if it's another callingMethod, IDENTIFIER, or dataStructure
+                if (ctx.callingMethod(i) != null) {
+                    callingMethod.addChainedCall((ASTNode) visit(ctx.callingMethod(i)));
+                } else if (ctx.IDENTIFIER(i) != null) {
+                    callingMethod.addChainedCall(ctx.IDENTIFIER(i).getText()); // Add plain string for IDENTIFIER
+                } else if (ctx.dataStructure(i) != null) {
+                    callingMethod.addChainedCall((ASTNode) visit(ctx.dataStructure(i)));
+                }
+            }
+        }
+
+        return callingMethod;
     }
+
+
 
     @Override
     public ASTNode visitDataStructure(AngularParser.DataStructureContext ctx) {

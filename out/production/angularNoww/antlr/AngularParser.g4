@@ -35,7 +35,7 @@ importSpecifier
          |arrowMethod;
 
          methodDeclaration:
-        ( (modifier)? IDENTIFIER parameterList (COLON IDENTIFIER?)? block)
+        ((modifier)? IDENTIFIER parameterList (COLON IDENTIFIER?)? block)
          |arrowMethod;
 
           arrowMethod:
@@ -78,7 +78,7 @@ outputDeclaration
     : OUTPUT LPAREN (literal)? RPAREN objectDecleration;
 
 variableDeclaration
-    :(modifier? type)? IDENTIFIER (COLON expression)?  (EQUAL expression)? (AS IDENTIFIER)? eos?;
+    :(modifier? type)? IDENTIFIER (COLON expression)?  (EQUAL expression)? (AS IDENTIFIER)? eos;
 
 type:(CONST | LET | VAR);
 
@@ -87,7 +87,7 @@ propertyDeclaration:(modifier)? property (EQUAL expression)? eos;
 property:(IDENTIFIER COLON expression)|imports;
 
 objectDecleration:
-(property|objectName) EQUAL objectInit eos?;
+(property|objectName) EQUAL objectInit eos;
 
 objectName:
 IDENTIFIER  objectType? ;
@@ -134,13 +134,16 @@ literal
 
 
 ifStatement
-    : IF LPAREN expression (compersion expression)? RPAREN block (ELSEIF LPAREN expression (compersion expression)? RPAREN block)* (ELSE block)?
+    :( IF LPAREN expression  RPAREN block elseIfStatment* elseStatment?)
     |shortIf
     |arrowIf;
 
-shortIf:LPAREN? expression (compersion expression)? RPAREN? QUESITIONMARK LPAREN?  statement RPAREN?  (COLON LPAREN? expression (compersion expression)? RPAREN? QUESITIONMARK LPAREN?  statement RPAREN? )* COLON LPAREN?  statement RPAREN? ;
+elseIfStatment:ELSEIF LPAREN expression  RPAREN block;
+elseStatment:ELSE block;
 
-arrowIf:LPAREN? expression (compersion expression)? RPAREN? ARROW expression;
+shortIf:LPAREN? expression  RPAREN? QUESITIONMARK LPAREN?  statement RPAREN?  (COLON LPAREN? expression  RPAREN? QUESITIONMARK LPAREN?  statement RPAREN? )* COLON LPAREN?  statement RPAREN? ;
+
+arrowIf:LPAREN? expression  RPAREN? ARROW expression;
 
 forStatement
     : FOR LPAREN (variableDeclaration | expression)? SEMI expression? SEMI expression? RPAREN block;

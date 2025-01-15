@@ -35,7 +35,7 @@ importSpecifier
          |arrowMethod;
 
          methodDeclaration:
-        ( (modifier)? IDENTIFIER parameterList (COLON IDENTIFIER?)? block)
+        ((modifier)? IDENTIFIER parameterList (COLON IDENTIFIER?)? block)
          |arrowMethod;
 
           arrowMethod:
@@ -134,13 +134,18 @@ literal
 
 
 ifStatement
-    : IF LPAREN expression (compersion expression)? RPAREN block (ELSEIF LPAREN expression (compersion expression)? RPAREN block)* (ELSE block)?
+    :( IF LPAREN expression  RPAREN block elseIfStatment* elseStatment?)
     |shortIf
     |arrowIf;
 
-shortIf:LPAREN? expression (compersion expression)? RPAREN? QUESITIONMARK LPAREN?  statement RPAREN?  (COLON LPAREN? expression (compersion expression)? RPAREN? QUESITIONMARK LPAREN?  statement RPAREN? )* COLON LPAREN?  statement RPAREN? ;
+elseIfStatment:ELSEIF LPAREN expression  RPAREN block;
+elseStatment:ELSE block;
 
-arrowIf:LPAREN? expression (compersion expression)? RPAREN? ARROW expression;
+shortIf:LPAREN? expression  RPAREN? QUESITIONMARK LPAREN?  statement RPAREN?  (shortElseIf )* shortelse ;
+shortElseIf:COLON LPAREN? expression  RPAREN? QUESITIONMARK LPAREN?  statement RPAREN?;
+shortelse:COLON LPAREN?  statement RPAREN?;
+
+arrowIf:LPAREN? expression  RPAREN? ARROW expression;
 
 forStatement
     : FOR LPAREN (variableDeclaration | expression)? SEMI expression? SEMI expression? RPAREN block;

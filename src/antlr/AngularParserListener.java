@@ -368,6 +368,26 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitIfStatement(AngularParser.IfStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AngularParser#elseIfStatment}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseIfStatment(AngularParser.ElseIfStatmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#elseIfStatment}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseIfStatment(AngularParser.ElseIfStatmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#elseStatment}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseStatment(AngularParser.ElseStatmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#elseStatment}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseStatment(AngularParser.ElseStatmentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AngularParser#shortIf}.
 	 * @param ctx the parse tree
 	 */
@@ -377,6 +397,26 @@ public interface AngularParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitShortIf(AngularParser.ShortIfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#shortElseIf}.
+	 * @param ctx the parse tree
+	 */
+	void enterShortElseIf(AngularParser.ShortElseIfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#shortElseIf}.
+	 * @param ctx the parse tree
+	 */
+	void exitShortElseIf(AngularParser.ShortElseIfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#shortelse}.
+	 * @param ctx the parse tree
+	 */
+	void enterShortelse(AngularParser.ShortelseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#shortelse}.
+	 * @param ctx the parse tree
+	 */
+	void exitShortelse(AngularParser.ShortelseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AngularParser#arrowIf}.
 	 * @param ctx the parse tree

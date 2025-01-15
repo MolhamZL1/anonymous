@@ -227,11 +227,35 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfStatement(AngularParser.IfStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AngularParser#elseIfStatment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseIfStatment(AngularParser.ElseIfStatmentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#elseStatment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseStatment(AngularParser.ElseStatmentContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AngularParser#shortIf}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitShortIf(AngularParser.ShortIfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#shortElseIf}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitShortElseIf(AngularParser.ShortElseIfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#shortelse}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitShortelse(AngularParser.ShortelseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AngularParser#arrowIf}.
 	 * @param ctx the parse tree
