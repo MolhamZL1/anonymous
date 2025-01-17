@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShortIf implements ASTNode {
-    private Expression expression;            // The condition for the if statement
+    private ASTNode expression;            // The condition for the if statement
     private Statement statement;              // The statement executed if the condition is true
     private List<ShortElseIf> shortElseIfs;   // A list of else-if blocks
     private ShortElse shortElse;              // The else block at the end
 
-    public ShortIf(Expression expression, Statement statement) {
+    public ShortIf(ASTNode expression, Statement statement) {
         this.expression = expression;
         this.statement = statement;
         this.shortElseIfs = new ArrayList<>();
@@ -25,7 +25,7 @@ public class ShortIf implements ASTNode {
         this.shortElse = shortElse;
     }
 
-    public Expression getExpression() {
+    public ASTNode getExpression() {
         return expression;
     }
 
@@ -44,10 +44,10 @@ public class ShortIf implements ASTNode {
     @Override
     public String toString() {
         return "\nShortIf{" +
-                "expression=" + expression +
-                ", statement=" + statement +
-                ", shortElseIfs=" + shortElseIfs +
-                ", shortElse=" + shortElse +
+                expression +
+                statement +
+                shortElseIfs +
+               shortElse +
                 "\n}";
     }
 }

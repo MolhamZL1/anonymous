@@ -39,7 +39,7 @@ importSpecifier
          |arrowMethod;
 
           arrowMethod:
-          (modifier? IDENTIFIER)? parameterList  (COLON IDENTIFIER?)?  ARROW LCURLY? statement* RCURLY?;
+          modifier? IDENTIFIER? parameterList  (COLON IDENTIFIER?)?  ARROW LCURLY? statement* RCURLY?;
 
           block:
           LCURLY statement* returnStatement? RCURLY;

@@ -280,7 +280,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
         } else if (ctx.FINAL() != null) {
             return new Modifier("FINAL");
         } else if (ctx.ASYNC() != null) {
-            return new Modifier("ASYNC");
+            return new Modifier("async");
         } else if (ctx.EXPORT() != null) {
             return new Modifier("EXPORT");
         }
@@ -406,8 +406,8 @@ public class BaseVisitor extends AngularParserBaseVisitor {
         String modifier = null;
         String type = null;
         String name = ctx.IDENTIFIER(0).getText();
-        Expression expression = null;
-        Expression initialValue = null;
+        ASTNode expression = null;
+        ASTNode initialValue = null;
         String alias = null;
 
         // Check for modifier (e.g., 'public', 'private', 'static')
@@ -422,7 +422,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
         // Check if there's a type annotation (COLON expression)
         if (ctx.expression(0) != null) {
-            expression = (Expression) visit(ctx.expression(0));
+            expression = (ASTNode) visit(ctx.expression(0));
         }
 
         // Check for initial value (EQUAL expression)
@@ -536,9 +536,9 @@ public class BaseVisitor extends AngularParserBaseVisitor {
             String identifier = ctx.IDENTIFIER(i).getText();
 
             // Check if a list is present for this identifier
-            List<ASTNode> list = null;
+            ASTNode list = null;
             if (ctx.list(i) != null) {
-                list = (List<ASTNode>) visit(ctx.list(i));
+                list = (ASTNode) visit(ctx.list(i));
             }
 
             objectType.addType(identifier, list);
@@ -630,23 +630,23 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     }
 
     @Override
-    public Object visitObjectLiteralExpression(AngularParser.ObjectLiteralExpressionContext ctx) {
-        return  visit(ctx.objectLiteral());
+    public ASTNode visitObjectLiteralExpression(AngularParser.ObjectLiteralExpressionContext ctx) {
+        return new ExistingExpression((ASTNode) visit(ctx.objectLiteral())).expression;
     }
 
     @Override
-    public Object visitObjectDeclarationExpression(AngularParser.ObjectDeclarationExpressionContext ctx) {
-        return visit(ctx.objectDecleration());
+    public ASTNode visitObjectDeclarationExpression(AngularParser.ObjectDeclarationExpressionContext ctx) {
+        return new ExistingExpression((ASTNode) visit(ctx.objectDecleration())).expression;
     }
 
     @Override
-    public Object visitObjectNameExpression(AngularParser.ObjectNameExpressionContext ctx) {
-        return visit(ctx.objectName());
+    public ASTNode visitObjectNameExpression(AngularParser.ObjectNameExpressionContext ctx) {
+        return new ExistingExpression((ASTNode) visit(ctx.objectName())).expression;
     }
 
     @Override
-    public Object visitArrowMethodExpression(AngularParser.ArrowMethodExpressionContext ctx) {
-        return  visit(ctx.arrowMethod());
+    public ASTNode visitArrowMethodExpression(AngularParser.ArrowMethodExpressionContext ctx) {
+        return new ExistingExpression((ASTNode) visit(ctx.arrowMethod())).expression;
     }
 
     @Override
@@ -678,13 +678,14 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
     @Override
     public ASTNode visitLiteralExpression(AngularParser.LiteralExpressionContext ctx) {
-        return (Literal) visit(ctx.literal());
+
+        return new ExistingExpression((ASTNode) visit(ctx.literal())).expression;
     }
 
     @Override
     public ASTNode visitCallingMethodExpression(AngularParser.CallingMethodExpressionContext ctx) {
 
-        return (ASTNode) visit(ctx.callingMethod());
+        return new ExistingExpression((ASTNode) visit(ctx.callingMethod())).expression;
     }
 
     @Override
@@ -725,15 +726,23 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     }
 
     @Override
-    public Object visitDataStructureExpression(AngularParser.DataStructureExpressionContext ctx) {
-        return visit(ctx.dataStructure());
+    public ASTNode visitDataStructureExpression(AngularParser.DataStructureExpressionContext ctx) {
+        return new ExistingExpression((ASTNode) visit(ctx.dataStructure())).expression;
     }
 
 
     @Override
     public ASTNode visitIfStatement(AngularParser.IfStatementContext ctx) {
+        if (ctx.shortIf() != null) {
+            // Handle arrow method
+            return (ASTNode) visit(ctx.shortIf());
+        }
+        if (ctx.arrowIf() != null) {
+            // Handle arrow method
+            return (ASTNode) visit(ctx.arrowIf());
+        }
         // Visit the expression (condition) and block
-        Expression condition = (Expression) visit(ctx.expression());
+        ASTNode condition = (ASTNode) visit(ctx.expression());
         Block block = (Block) visit(ctx.block());
 
         // Create the IfStatement with condition and block
@@ -758,7 +767,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     @Override
     public ASTNode visitElseIfStatment(AngularParser.ElseIfStatmentContext ctx) {
         // Visit the expression and block inside the elseif statement
-        Expression condition = (Expression) visit(ctx.expression());
+        ASTNode condition = (ASTNode) visit(ctx.expression());
         Block block = (Block) visit(ctx.block());
 
         // Return a new ElseIfStatement with the condition and block
@@ -777,7 +786,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     @Override
     public ASTNode visitShortIf(AngularParser.ShortIfContext ctx) {
         // Visit the expression and statement parts of the short if
-        Expression expression = (Expression) visit(ctx.expression());
+        ASTNode expression = (ASTNode) visit(ctx.expression());
         Statement statement = (Statement) visit(ctx.statement());
 
         // Create the ShortIf AST node
@@ -880,7 +889,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     @Override
     public ASTNode visitCallingMethod(AngularParser.CallingMethodContext ctx) {
         // Extract method name (IDENTIFIER or CATCH)
-        String methodName = ctx.IDENTIFIER() != null ? ctx.IDENTIFIER(0).getText() : ctx.CATCH().getText();
+        String methodName = ctx.IDENTIFIER(0) != null ? ctx.IDENTIFIER(0).getText() : ctx.CATCH().getText();
 
         // Create CallingMethod instance
         CallingMethod callingMethod = new CallingMethod(methodName);

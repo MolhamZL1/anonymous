@@ -1224,6 +1224,9 @@ public class AngularParser extends Parser {
 			return getRuleContext(ParameterListContext.class,0);
 		}
 		public TerminalNode ARROW() { return getToken(AngularParser.ARROW, 0); }
+		public ModifierContext modifier() {
+			return getRuleContext(ModifierContext.class,0);
+		}
 		public List<TerminalNode> IDENTIFIER() { return getTokens(AngularParser.IDENTIFIER); }
 		public TerminalNode IDENTIFIER(int i) {
 			return getToken(AngularParser.IDENTIFIER, i);
@@ -1237,9 +1240,6 @@ public class AngularParser extends Parser {
 			return getRuleContext(StatementContext.class,i);
 		}
 		public TerminalNode RCURLY() { return getToken(AngularParser.RCURLY, 0); }
-		public ModifierContext modifier() {
-			return getRuleContext(ModifierContext.class,0);
-		}
 		public ArrowMethodContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1267,21 +1267,21 @@ public class AngularParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
+			setState(251);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1121501893885952L) != 0)) {
+				{
+				setState(250);
+				modifier();
+				}
+			}
+
 			setState(254);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 25)) & ~0x3f) == 0 && ((1L << (_la - 25)) & 1152921504640270337L) != 0)) {
+			if (_la==IDENTIFIER) {
 				{
-				setState(251);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1121501893885952L) != 0)) {
-					{
-					setState(250);
-					modifier();
-					}
-				}
-
 				setState(253);
 				match(IDENTIFIER);
 				}
@@ -5651,7 +5651,7 @@ public class AngularParser extends Parser {
 		"\u0000\n\u00bb\u0001\u0000\u0000\u0000\f\u00bf\u0001\u0000\u0000\u0000"+
 		"\u000e\u00ce\u0001\u0000\u0000\u0000\u0010\u00d2\u0001\u0000\u0000\u0000"+
 		"\u0012\u00d6\u0001\u0000\u0000\u0000\u0014\u00e8\u0001\u0000\u0000\u0000"+
-		"\u0016\u00f8\u0001\u0000\u0000\u0000\u0018\u00fe\u0001\u0000\u0000\u0000"+
+		"\u0016\u00f8\u0001\u0000\u0000\u0000\u0018\u00fb\u0001\u0000\u0000\u0000"+
 		"\u001a\u0114\u0001\u0000\u0000\u0000\u001c\u0120\u0001\u0000\u0000\u0000"+
 		"\u001e\u0135\u0001\u0000\u0000\u0000 \u0137\u0001\u0000\u0000\u0000\""+
 		"\u013a\u0001\u0000\u0000\u0000$\u0155\u0001\u0000\u0000\u0000&\u0157\u0001"+
@@ -5750,8 +5750,8 @@ public class AngularParser extends Parser {
 		"\u0000\u0000\u0000\u00f7\u00f9\u0003\u0018\f\u0000\u00f8\u00eb\u0001\u0000"+
 		"\u0000\u0000\u00f8\u00f7\u0001\u0000\u0000\u0000\u00f9\u0017\u0001\u0000"+
 		"\u0000\u0000\u00fa\u00fc\u0003 \u0010\u0000\u00fb\u00fa\u0001\u0000\u0000"+
-		"\u0000\u00fb\u00fc\u0001\u0000\u0000\u0000\u00fc\u00fd\u0001\u0000\u0000"+
-		"\u0000\u00fd\u00ff\u0005U\u0000\u0000\u00fe\u00fb\u0001\u0000\u0000\u0000"+
+		"\u0000\u00fb\u00fc\u0001\u0000\u0000\u0000\u00fc\u00fe\u0001\u0000\u0000"+
+		"\u0000\u00fd\u00ff\u0005U\u0000\u0000\u00fe\u00fd\u0001\u0000\u0000\u0000"+
 		"\u00fe\u00ff\u0001\u0000\u0000\u0000\u00ff\u0100\u0001\u0000\u0000\u0000"+
 		"\u0100\u0105\u0003\u001c\u000e\u0000\u0101\u0103\u0005L\u0000\u0000\u0102"+
 		"\u0104\u0005U\u0000\u0000\u0103\u0102\u0001\u0000\u0000\u0000\u0103\u0104"+

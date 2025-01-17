@@ -1,9 +1,0 @@
-
-
-export class HeaderComponent {
-    public receiveProduct(product:any){
-      if(0){
-
-      }
-    }
-}

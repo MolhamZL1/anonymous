@@ -6,11 +6,11 @@ public class VariableDeclaration implements ASTNode {
     private String modifier;
     private String type;
     private String name; // Variable name (IDENTIFIER)
-    private Expression expression; // Optional expression (COLON expression)
-    private Expression initialValue; // Optional initial value (EQUAL expression)
+    private ASTNode expression; // Optional expression (COLON expression)
+    private ASTNode initialValue; // Optional initial value (EQUAL expression)
     private String alias; // Optional alias for the variable (AS IDENTIFIER)
 
-    public VariableDeclaration(String modifier, String type, String name, Expression expression, Expression initialValue, String alias) {
+    public VariableDeclaration(String modifier, String type, String name, ASTNode expression, ASTNode initialValue, String alias) {
         this.modifier = modifier;
         this.type = type;
         this.name = name;
@@ -31,11 +31,11 @@ public class VariableDeclaration implements ASTNode {
         return name;
     }
 
-    public Expression getExpression() {
+    public ASTNode getExpression() {
         return expression;
     }
 
-    public Expression getInitialValue() {
+    public ASTNode getInitialValue() {
         return initialValue;
     }
 

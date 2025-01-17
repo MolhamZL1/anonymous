@@ -3,15 +3,15 @@ package AST;
 import AST.Expressions.Expression;
 
 public class ElseIfStatement implements ASTNode {
-    private Expression condition; // The condition for the elseif
+    private ASTNode condition; // The condition for the elseif
     private Block block; // The block to execute if the condition is true
 
-    public ElseIfStatement(Expression condition, Block block) {
+    public ElseIfStatement(ASTNode condition, Block block) {
         this.condition = condition;
         this.block = block;
     }
 
-    public Expression getCondition() {
+    public ASTNode getCondition() {
         return condition;
     }
 

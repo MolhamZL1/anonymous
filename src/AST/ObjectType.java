@@ -10,7 +10,7 @@ public class ObjectType implements ASTNode {
         this.types = new ArrayList<>();
     }
 
-    public void addType(String identifier, List<ASTNode> list) {
+    public void addType(String identifier, ASTNode list) {
         this.types.add(new TypeWithList(identifier, list));
     }
 
@@ -28,9 +28,9 @@ public class ObjectType implements ASTNode {
     // Helper class to represent type with optional list
     public static class TypeWithList {
         private String identifier;
-        private List<ASTNode> list;
+        private ASTNode list;
 
-        public TypeWithList(String identifier, List<ASTNode> list) {
+        public TypeWithList(String identifier,ASTNode list) {
             this.identifier = identifier;
             this.list = list;
         }
@@ -39,7 +39,7 @@ public class ObjectType implements ASTNode {
             return identifier;
         }
 
-        public List<ASTNode> getList() {
+        public ASTNode getList() {
             return list;
         }
 
