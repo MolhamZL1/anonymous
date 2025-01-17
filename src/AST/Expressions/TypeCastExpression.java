@@ -3,7 +3,8 @@ package AST.Expressions;
 
 import AST.ASTNode;
 
-public class TypeCastExpression extends Expression {
+
+public class TypeCastExpression implements Expression {
     private ASTNode expression;
     private String typeIdentifier;
 

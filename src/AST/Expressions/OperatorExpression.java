@@ -2,7 +2,8 @@ package AST.Expressions;
 
 import AST.ASTNode;
 
-public class OperatorExpression extends Expression {
+
+public class OperatorExpression implements Expression {
     private ASTNode left;
     private String operator;
     private ASTNode right;

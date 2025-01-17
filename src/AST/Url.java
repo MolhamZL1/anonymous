@@ -13,8 +13,8 @@ public class Url implements ASTNode {
 
     @Override
     public String toString() {
-        return "Url{" +
+        return "\nUrl{" +
                   url +
-                '}';
+                "\n}";
     }
 }

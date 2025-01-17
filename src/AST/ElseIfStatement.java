@@ -1,5 +1,7 @@
 package AST;
 
+import AST.Expressions.Expression;
+
 public class ElseIfStatement implements ASTNode {
     private Expression condition; // The condition for the elseif
     private Block block; // The block to execute if the condition is true
@@ -19,9 +21,9 @@ public class ElseIfStatement implements ASTNode {
 
     @Override
     public String toString() {
-        return "ElseIfStatement{" +
-                "condition=" + condition +
-                ", block=" + block +
-                '}';
+        return "\nElseIfStatement{" +
+                condition +
+                block +
+               "\n}";
     }
 }

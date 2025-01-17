@@ -2,7 +2,8 @@ package AST.Expressions;
 
 
 
-public class IdentifierExpression extends Expression {
+
+public class IdentifierExpression implements Expression {
     private String name;
 
     public IdentifierExpression(String name) {

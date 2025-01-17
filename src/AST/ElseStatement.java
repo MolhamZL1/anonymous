@@ -14,8 +14,8 @@ public class ElseStatement implements ASTNode{
 
         @Override
         public String toString() {
-            return "ElseStatement{" +
-                    "block=" + block +
-                    '}';
+            return "\nElseStatement{" +
+                   block +
+                    "\n}";
         }
     }

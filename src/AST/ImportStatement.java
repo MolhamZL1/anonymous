@@ -50,9 +50,9 @@ public class ImportStatement implements ASTNode {
     public String toString() {
         return "\nImportStatement{" +
                 "source='" + source + '\'' +
-                (defaultImport != null ? ", defaultImport='" + defaultImport + '\'' : "") +
-                (wildcardImport != null ? ", wildcardImport=" + wildcardImport : "") +
-                (!namedImports.isEmpty() ? ", namedImports=" + namedImports : "") +
+                (defaultImport != null ?  defaultImport + '\'' : "") +
+                (wildcardImport != null ?  wildcardImport : "") +
+                (!namedImports.isEmpty() ?  namedImports : "") +
                 '}';
     }
 }

@@ -215,11 +215,131 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatement(AngularParser.StatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AngularParser#expression}.
+	 * Visit a parse tree produced by the {@code PostIncrementExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(AngularParser.ExpressionContext ctx);
+	T visitPostIncrementExpression(AngularParser.PostIncrementExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code DataStructureExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataStructureExpression(AngularParser.DataStructureExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code DotExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDotExpression(AngularParser.DotExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ObjectLiteralExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitObjectLiteralExpression(AngularParser.ObjectLiteralExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code TypeCastExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeCastExpression(AngularParser.TypeCastExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LiteralExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteralExpression(AngularParser.LiteralExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CallingMethodExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCallingMethodExpression(AngularParser.CallingMethodExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IdentifierExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifierExpression(AngularParser.IdentifierExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ArrowMethodExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrowMethodExpression(AngularParser.ArrowMethodExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ThisExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitThisExpression(AngularParser.ThisExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComparisonExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComparisonExpression(AngularParser.ComparisonExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ObjectNameExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitObjectNameExpression(AngularParser.ObjectNameExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AssignmentExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignmentExpression(AngularParser.AssignmentExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code OperatorExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperatorExpression(AngularParser.OperatorExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code GenericTypeExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGenericTypeExpression(AngularParser.GenericTypeExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PostDecrementExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostDecrementExpression(AngularParser.PostDecrementExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ObjectDeclarationExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitObjectDeclarationExpression(AngularParser.ObjectDeclarationExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExpressionList}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpressionList(AngularParser.ExpressionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AngularParser#ifStatement}.
 	 * @param ctx the parse tree

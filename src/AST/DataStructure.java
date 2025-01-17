@@ -13,8 +13,8 @@ public class DataStructure implements ASTNode {
 
     @Override
     public String toString() {
-        return "DataStructure{" +
-                "structure=" + structure +
-                '}';
+        return "\nDataStructure{" +
+                structure +
+                "\n}";
     }
 }

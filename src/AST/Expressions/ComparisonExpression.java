@@ -3,7 +3,8 @@ package AST.Expressions;
 
 import AST.ASTNode;
 
-public class ComparisonExpression extends Expression {
+
+public class ComparisonExpression implements Expression {
     private ASTNode left;
     private String operator;
     private ASTNode right;

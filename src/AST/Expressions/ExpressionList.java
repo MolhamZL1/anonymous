@@ -5,7 +5,7 @@ package AST.Expressions;
 import AST.ASTNode;
 import AST.ListStructure;
 
-public class ExpressionList extends Expression {
+public class ExpressionList implements Expression {
     private ASTNode expression;
     private ListStructure list;
 

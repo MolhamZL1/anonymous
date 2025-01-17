@@ -1,5 +1,7 @@
 package AST;
 
+import AST.Expressions.Expression;
+
 public class VariableDeclaration implements ASTNode {
     private String modifier;
     private String type;
@@ -43,13 +45,13 @@ public class VariableDeclaration implements ASTNode {
 
     @Override
     public String toString() {
-        return "VariableDeclaration{" +
+        return "\nVariableDeclaration{" +
                 "modifier='" + modifier + '\'' +
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", expression=" + expression +
                 ", initialValue=" + initialValue +
                 ", alias='" + alias + '\'' +
-                '}';
+                "\n}";
     }
 }

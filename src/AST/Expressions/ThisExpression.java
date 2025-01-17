@@ -2,7 +2,8 @@ package AST.Expressions;
 
 
 
-public class ThisExpression extends Expression {
+
+public class ThisExpression implements Expression {
     @Override
     public String toString() {
         return "this";

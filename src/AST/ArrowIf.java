@@ -1,5 +1,7 @@
 package AST;
 
+import AST.Expressions.Expression;
+
 public class ArrowIf implements ASTNode {
     private Expression condition;  // The expression before the ARROW
     private Expression result;     // The expression after the ARROW
@@ -19,9 +21,9 @@ public class ArrowIf implements ASTNode {
 
     @Override
     public String toString() {
-        return "ArrowIf{" +
-                "condition=" + condition +
-                ", result=" + result +
-                '}';
+        return "\nArrowIf{" +
+              condition +
+               result +
+                "\n}";
     }
 }

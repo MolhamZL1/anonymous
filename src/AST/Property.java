@@ -20,9 +20,9 @@ public class Property implements ASTNode {
 
     @Override
     public String toString() {
-        return "Property{" +
+        return "\nProperty{" +
                name!=null? ("name='" + name + '\'' ):""+
                 ", value=" + value +
-                '}';
+                "\n}";
     }
 }

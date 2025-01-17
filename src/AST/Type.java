@@ -13,8 +13,8 @@ public class Type implements ASTNode {
 
     @Override
     public String toString() {
-        return "Type{" +
+        return "\nType{" +
                  type +
-                '}';
+                "\n}";
     }
 }

@@ -14,8 +14,8 @@ public class ItemsStructures implements ASTNode{
 
         @Override
         public String toString() {
-            return "ItemsStructure{" +
-                    "structure=" + structure +
+            return "\nItemsStructure{" +
+                     structure +
                     '}';
         }
 

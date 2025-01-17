@@ -2,7 +2,8 @@ package AST.Expressions;
 
 
 
-public class PostDecrementExpression extends Expression {
+
+public class PostDecrementExpression implements Expression {
     private String identifier;
 
     public PostDecrementExpression(String identifier) {

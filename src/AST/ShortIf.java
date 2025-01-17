@@ -1,5 +1,7 @@
 package AST;
 
+import AST.Expressions.Expression;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +43,11 @@ public class ShortIf implements ASTNode {
 
     @Override
     public String toString() {
-        return "ShortIf{" +
+        return "\nShortIf{" +
                 "expression=" + expression +
                 ", statement=" + statement +
                 ", shortElseIfs=" + shortElseIfs +
                 ", shortElse=" + shortElse +
-                '}';
+                "\n}";
     }
 }

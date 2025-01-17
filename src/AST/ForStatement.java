@@ -47,11 +47,11 @@ public class ForStatement implements ASTNode {
 
     @Override
     public String toString() {
-        return "ForStatement{" +
-                "initializer=" + initializer +
-                ", condition=" + condition +
-                ", increment=" + increment +
-                ", block=" + block +
-                '}';
+        return "\nForStatement{" +
+               initializer +
+               condition +
+                 increment +
+                block +
+                "\n}";
     }
 }

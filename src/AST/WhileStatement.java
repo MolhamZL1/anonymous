@@ -27,9 +27,9 @@ public class WhileStatement implements ASTNode {
 
     @Override
     public String toString() {
-        return "WhileStatement{" +
-                "condition=" + condition +
-                ", block=" + block +
-                '}';
+        return "\nWhileStatement{" +
+                "\ncondition=" + condition +
+                "\nblock=" + block +
+                "\n}";
     }
 }

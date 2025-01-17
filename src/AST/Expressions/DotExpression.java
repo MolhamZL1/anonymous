@@ -3,7 +3,9 @@ package AST.Expressions;
 import AST.ASTNode;
 import AST.Expressions.Expression;
 
-public class DotExpression extends Expression {
+
+public class DotExpression implements Expression {
+
     private ASTNode left;
     private ASTNode right;
 

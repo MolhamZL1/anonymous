@@ -3,7 +3,8 @@ package AST.Expressions;
 import AST.ASTNode;
 import AST.Expressions.Expression;
 
-public class AssignmentExpression extends Expression {
+
+public class AssignmentExpression implements Expression {
     private ASTNode left;
     private ASTNode right;
 

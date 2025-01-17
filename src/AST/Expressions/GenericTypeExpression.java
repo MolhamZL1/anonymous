@@ -3,7 +3,8 @@ package AST.Expressions;
 
 import AST.ASTNode;
 
-public class GenericTypeExpression extends Expression {
+
+public class GenericTypeExpression implements Expression {
     private ASTNode expression;
     private String typeIdentifier;
 

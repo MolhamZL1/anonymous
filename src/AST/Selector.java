@@ -13,8 +13,8 @@ public class Selector implements ASTNode {
 
     @Override
     public String toString() {
-        return "Selector{" +
+        return "\nSelector{" +
                 selector +
-                '}';
+                "\n}";
     }
 }

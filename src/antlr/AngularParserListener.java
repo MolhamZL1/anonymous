@@ -348,15 +348,221 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitStatement(AngularParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AngularParser#expression}.
+	 * Enter a parse tree produced by the {@code PostIncrementExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression(AngularParser.ExpressionContext ctx);
+	void enterPostIncrementExpression(AngularParser.PostIncrementExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AngularParser#expression}.
+	 * Exit a parse tree produced by the {@code PostIncrementExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression(AngularParser.ExpressionContext ctx);
+	void exitPostIncrementExpression(AngularParser.PostIncrementExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DataStructureExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataStructureExpression(AngularParser.DataStructureExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DataStructureExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataStructureExpression(AngularParser.DataStructureExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DotExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterDotExpression(AngularParser.DotExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DotExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitDotExpression(AngularParser.DotExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ObjectLiteralExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterObjectLiteralExpression(AngularParser.ObjectLiteralExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ObjectLiteralExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitObjectLiteralExpression(AngularParser.ObjectLiteralExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code TypeCastExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeCastExpression(AngularParser.TypeCastExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code TypeCastExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeCastExpression(AngularParser.TypeCastExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code LiteralExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteralExpression(AngularParser.LiteralExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LiteralExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteralExpression(AngularParser.LiteralExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code CallingMethodExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterCallingMethodExpression(AngularParser.CallingMethodExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code CallingMethodExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitCallingMethodExpression(AngularParser.CallingMethodExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IdentifierExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierExpression(AngularParser.IdentifierExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IdentifierExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierExpression(AngularParser.IdentifierExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ArrowMethodExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrowMethodExpression(AngularParser.ArrowMethodExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ArrowMethodExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrowMethodExpression(AngularParser.ArrowMethodExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ThisExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterThisExpression(AngularParser.ThisExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ThisExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitThisExpression(AngularParser.ThisExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComparisonExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparisonExpression(AngularParser.ComparisonExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparisonExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparisonExpression(AngularParser.ComparisonExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ObjectNameExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterObjectNameExpression(AngularParser.ObjectNameExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ObjectNameExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitObjectNameExpression(AngularParser.ObjectNameExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AssignmentExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignmentExpression(AngularParser.AssignmentExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AssignmentExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignmentExpression(AngularParser.AssignmentExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code OperatorExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperatorExpression(AngularParser.OperatorExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code OperatorExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperatorExpression(AngularParser.OperatorExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code GenericTypeExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterGenericTypeExpression(AngularParser.GenericTypeExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code GenericTypeExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitGenericTypeExpression(AngularParser.GenericTypeExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PostDecrementExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostDecrementExpression(AngularParser.PostDecrementExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PostDecrementExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostDecrementExpression(AngularParser.PostDecrementExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ObjectDeclarationExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterObjectDeclarationExpression(AngularParser.ObjectDeclarationExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ObjectDeclarationExpression}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitObjectDeclarationExpression(AngularParser.ObjectDeclarationExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExpressionList}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressionList(AngularParser.ExpressionListContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExpressionList}
+	 * labeled alternative in {@link AngularParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressionList(AngularParser.ExpressionListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AngularParser#ifStatement}.
 	 * @param ctx the parse tree

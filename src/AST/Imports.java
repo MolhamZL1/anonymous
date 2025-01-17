@@ -20,8 +20,8 @@ public class Imports implements ASTNode {
 
     @Override
     public String toString() {
-        return "Imports{" +
+        return "\nImports{" +
                 imports +
-                '}';
+               " '}'";
     }
 }

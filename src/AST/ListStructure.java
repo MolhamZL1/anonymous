@@ -20,8 +20,8 @@ public class ListStructure implements ASTNode {
 
     @Override
     public String toString() {
-        return "ListStructure{" +
-                "items=" + items +
+        return "\nListStructure{" +
+                 items +
                 '}';
     }
 }
