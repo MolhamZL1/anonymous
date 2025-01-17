@@ -16,6 +16,6 @@ public class ExpressionList implements Expression {
 
     @Override
     public String toString() {
-        return expression + " " + list;
+        return "\nExpressionList{"+expression + " " + list+"\n}";
     }
 }

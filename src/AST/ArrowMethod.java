@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrowMethod implements ASTNode {
-    private String modifier;         // Optional modifier (e.g., PUBLIC, PRIVATE)
+    private Modifier modifier;         // Optional modifier (e.g., PUBLIC, PRIVATE)
     private String name;             // Optional method name (IDENTIFIER)
     private ParameterList parameters; // List of parameters
     private String returnType;       // Optional return type (IDENTIFIER)
     private List<Statement> statements; // List of statements inside the method block
 
-    public ArrowMethod(String modifier, String name, ParameterList parameters, String returnType) {
+    public ArrowMethod(Modifier modifier, String name, ParameterList parameters, String returnType) {
         this.modifier = modifier;
         this.name = name;
         this.parameters = parameters;
@@ -22,7 +22,7 @@ public class ArrowMethod implements ASTNode {
         this.statements.add(statement);
     }
 
-    public String getModifier() {
+    public Modifier getModifier() {
         return modifier;
     }
 
@@ -45,7 +45,7 @@ public class ArrowMethod implements ASTNode {
     @Override
     public String toString() {
         return "\nArrowMethod{" +
-                "modifier='" + modifier + '\'' +
+                modifier + '\'' +
                 ", name='" + name + '\'' +
                  parameters +
                 ", returnType='" + returnType + '\'' +

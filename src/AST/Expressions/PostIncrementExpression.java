@@ -12,6 +12,5 @@ public class PostIncrementExpression implements Expression {
 
     @Override
     public String toString() {
-        return identifier + "++";
-    }
-}
+        return "PostIncrementExpression{" + identifier + "++" + "}";
+    }}

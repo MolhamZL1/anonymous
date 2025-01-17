@@ -23,6 +23,6 @@ public class AssignmentExpression implements Expression {
 
     @Override
     public String toString() {
-        return left + " = " + right;
+        return "\nAssignmentExpression{"+ left + " = " + right+"\n}";
     }
 }

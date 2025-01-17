@@ -24,6 +24,6 @@ public class DotExpression implements Expression {
 
     @Override
     public String toString() {
-        return left + "." + right;
+        return"\nDotExpression{"+ left + "." + right+"\n}";
     }
 }

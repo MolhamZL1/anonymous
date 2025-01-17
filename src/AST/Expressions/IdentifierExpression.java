@@ -12,6 +12,6 @@ public class IdentifierExpression implements Expression {
 
     @Override
     public String toString() {
-        return name;
+        return "\nIdentifierExpression{"+name+"\n}";
     }
 }

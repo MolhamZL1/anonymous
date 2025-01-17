@@ -25,19 +25,24 @@ public class Main {
         System.out.println("The Parser Output for "+file.getName() +" :");
         System.out.println(program);
     }
-    static void getTests(String path)throws IOException{
+    static void getTests(String path)throws IOException {
         File folder = new File(path);
         File[] files = folder.listFiles();
         for (int i = 0; i < files.length; i++) {
-            if (files[i].getName().contains("html")||files[i].getName().contains("css"))continue;
-            if (files[i].isFile()){
+            //
+
+            if (files[i].isFile()) {
+                if (files[i].getName().contains("html") || files[i].getName().contains("css")) continue;
                 printAST(files[i]);
             }
-            else{
+
+            else {
+
                 getTests(files[i].getPath());
-            }
-        }
+            }}
     }
+
+
 
     public static void main(String[] args) throws IOException {
         getTests("src/Tests");

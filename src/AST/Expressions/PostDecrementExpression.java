@@ -12,6 +12,6 @@ public class PostDecrementExpression implements Expression {
 
     @Override
     public String toString() {
-        return identifier + "--";
+        return"PostDecrementExpression{"+ identifier + "--" +"}";
     }
 }

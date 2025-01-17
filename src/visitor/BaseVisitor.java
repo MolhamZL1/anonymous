@@ -237,7 +237,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
     @Override
     public ASTNode visitArrowMethod(AngularParser.ArrowMethodContext ctx) {
         // Extract the optional modifier (e.g., PUBLIC, PRIVATE)
-        String modifier = ctx.modifier() != null ? ctx.modifier().getText() : null;
+        Modifier modifier = ctx.modifier() != null ?(Modifier) visit( ctx.modifier()) : null;
 
         // Extract the optional method name (IDENTIFIER)
         String name = ctx.IDENTIFIER(0) != null ? ctx.IDENTIFIER(0).getText() : null;
@@ -289,7 +289,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
     @Override
     public ASTNode visitClassDeclaration(AngularParser.ClassDeclarationContext ctx) {
-        String modifier = ctx.modifier() != null ? ctx.modifier().getText() : null;
+        ASTNode modifier = ctx.modifier() != null ? (ASTNode) visit( ctx.modifier()) : null;
         String name = ctx.IDENTIFIER(0).getText();
         String parentOrInterface = null;
 
@@ -301,7 +301,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
         if (ctx.classMember() != null) {
             for (AngularParser.ClassMemberContext memberCtx : ctx.classMember()) {
-                classDeclaration.addMember((ASTNode) visit(memberCtx));
+                classDeclaration.addMember((ClassMember) visit(memberCtx));
             }
         }
 

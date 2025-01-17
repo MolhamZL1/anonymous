@@ -16,6 +16,6 @@ public class OperatorExpression implements Expression {
 
     @Override
     public String toString() {
-        return left + " " + operator + " " + right;
+        return "OperatorExpression{"+left + " " + operator + " " + right+"}";
     }
 }

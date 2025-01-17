@@ -17,6 +17,6 @@ public class ComparisonExpression implements Expression {
 
     @Override
     public String toString() {
-        return left + " " + operator + " " + right;
+        return "\nComparisonExpression{"+left + " " + operator + " " + right+"\n}";
     }
 }
