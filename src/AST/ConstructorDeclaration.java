@@ -12,17 +12,15 @@ public class ConstructorDeclaration implements ASTNode {
         this.block = block;
     }
 
-
-
     public Block getBlock() {
         return block;
     }
 
     @Override
     public String toString() {
-        return "ConstructorDeclaration{" +
-                "parameters=" + parameters +
-                ", block=" + block +
-                '}';
+        return "\nConstructorDeclaration{" +
+                 parameters +
+                block +
+                "\n}";
     }
 }

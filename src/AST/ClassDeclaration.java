@@ -26,7 +26,7 @@ public class ClassDeclaration implements ASTNode {
                 "modifier='" + modifier + '\'' +
                 ", name='" + name + '\'' +
                 ", parentOrInterface='" + parentOrInterface + '\'' +
-                ", members=" + members +
-                '}';
+               members +
+                "\n}";
     }
 }

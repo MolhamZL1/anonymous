@@ -20,9 +20,9 @@ public class ObjectType implements ASTNode {
 
     @Override
     public String toString() {
-        return "ObjectType{" +
+        return "\nObjectType{" +
                 "types=" + types +
-                '}';
+                "\n}";
     }
 
     // Helper class to represent type with optional list
@@ -45,10 +45,10 @@ public class ObjectType implements ASTNode {
 
         @Override
         public String toString() {
-            return "TypeWithList{" +
+            return "\nTypeWithList{" +
                     "identifier='" + identifier + '\'' +
                    list!=null? ", list=" + list :""+
-                    '}';
+                    "\n}";
         }
     }
 }

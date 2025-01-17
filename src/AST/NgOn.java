@@ -31,11 +31,11 @@ public class NgOn implements ASTNode {
 
     @Override
     public String toString() {
-        return "NgOn{" +
+        return "\nNgOn{" +
                 "type='" + type + '\'' +
-                ", parameters=" + parameters +
+                  parameters +
                 ", returnType='" + (returnType != null ? returnType : "void") + '\'' +
-                ", block=" + block +
-                '}';
+                   block +
+                "\n}";
     }
 }

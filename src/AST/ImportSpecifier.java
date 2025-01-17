@@ -44,8 +44,8 @@ public class ImportSpecifier implements ASTNode {
 
     @Override
     public String toString() {
-        return "ImportSpecifier{" +
-                "specifiers=" + specifiers +
-                '}';
+        return "\nImportSpecifier{" +
+                specifiers +
+                "}";
     }
 }

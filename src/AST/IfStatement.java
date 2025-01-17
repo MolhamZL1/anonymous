@@ -1,5 +1,7 @@
 package AST;
 
+import AST.Expressions.Expression;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +43,11 @@ public class IfStatement implements ASTNode {
 
     @Override
     public String toString() {
-        return "IfStatement{" +
-                "condition=" + condition +
-                ", block=" + block +
-                ", elseIfStatements=" + elseIfStatements +
-                ", elseStatement=" + elseStatement +
-                '}';
+        return "\nIfStatement{" +
+               condition +
+             block +
+               elseIfStatements +
+                elseStatement +
+               "\n}";
     }
 }

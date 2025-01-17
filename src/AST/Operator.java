@@ -13,8 +13,8 @@ public class Operator implements ASTNode {
 
     @Override
     public String toString() {
-        return "Operator{" +
+        return "\nOperator{" +
              operator  +
-                '}';
+                "\n}";
     }
 }

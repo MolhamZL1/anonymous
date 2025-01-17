@@ -19,9 +19,9 @@ public class InputDeclaration implements ASTNode {
 
     @Override
     public String toString() {
-        return "InputDeclaration{" +
-                "literal=" + literal +
-                ", property='" + property + '\'' +
-                '}';
+        return "\nInputDeclaration{" +
+                literal +
+                property + '\'' +
+                "\n}";
     }
 }

@@ -14,7 +14,7 @@ public class Modifier implements ASTNode{
 
     @Override
     public String toString() {
-        return "Modifier{" +
+        return "\nModifier{" +
                 type +
                 '}';
     }

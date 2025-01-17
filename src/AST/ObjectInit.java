@@ -32,10 +32,10 @@ public class ObjectInit implements ASTNode {
 
     @Override
     public String toString() {
-        return "ObjectInit{" +
+        return "\nObjectInit{" +
                 "className='" + className + '\'' +
                 ", objectType=" + (objectType != null ? objectType.toString() : "null") +
                 ", arguments=" + arguments +
-                '}';
+                "\n}";
     }
 }

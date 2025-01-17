@@ -1,5 +1,7 @@
 package AST;
 
+import AST.Expressions.Expression;
+
 public class ShortElseIf implements ASTNode {
     private Expression expression; // The condition expression
     private Statement statement;   // The statement that follows the condition
@@ -19,9 +21,9 @@ public class ShortElseIf implements ASTNode {
 
     @Override
     public String toString() {
-        return "ShortElseIf{" +
+        return "\nShortElseIf{" +
                 "expression=" + expression +
                 ", statement=" + statement +
-                '}';
+                "\n}";
     }
 }

@@ -17,8 +17,8 @@ public class ExpressionStatement implements ASTNode {
 
     @Override
     public String toString() {
-        return "ExpressionStatement{" +
-                "expression=" + expression +
-                '}';
+        return "\nExpressionStatement{" +
+                expression +
+                "\n}";
     }
 }

@@ -13,8 +13,8 @@ public class ShortElse implements ASTNode {
 
     @Override
     public String toString() {
-        return "ShortElse{" +
+        return "\nShortElse{" +
                 "statement=" + statement +
-                '}';
+                "\n}";
     }
 }

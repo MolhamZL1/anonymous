@@ -62,12 +62,12 @@ public class ComponentDeclaration implements ASTNode {
     @Override
     public String toString() {
         return "\nComponentDeclaration{" +
-                "\n" + ((selector!=null)?selector:"") +
-                ",\n" +((standalone!=null)?standalone:"") +
-                ",\n" + ((imports!=null)?imports:"") +
-                ",\n" + ((templateUrl!=null)?templateUrl:"") +
-                ",\n" + ((styleUrl!=null)?styleUrl:"") +
-                ",\n" + ((template!=null)?template:"") +
-                '}';
+                 ((selector!=null)?"\n" +selector:"") +
+                ((standalone!=null)?",\n" +standalone:"") +
+                ((imports!=null)? ",\n" +imports:"") +
+               ((templateUrl!=null)? ",\n" + templateUrl:"") +
+                ((styleUrl!=null)? ",\n" +styleUrl:"") +
+                 ((template!=null)?",\n" +template:"") +
+                "\n}";
     }
 }

@@ -19,9 +19,9 @@ public class OutputDeclaration implements ASTNode {
 
     @Override
     public String toString() {
-        return "OutputDeclaration{" +
-                "literal=" + (literal != null ? literal : "null") +
+        return "\nOutputDeclaration{" +
+                literal != null ?  "literal=" +  literal : "" +
                 ", objectDeclaration=" + objectDeclaration +
-                '}';
+                "\n}";
     }
 }

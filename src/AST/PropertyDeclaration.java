@@ -25,10 +25,10 @@ public class PropertyDeclaration implements ASTNode {
 
     @Override
     public String toString() {
-        return "PropertyDeclaration{" +
-                modifier != null ?   "modifier=" + modifier : "" +
-                ", property=" + property +
-                value != null ? ", value=" +  value : "" +
-                '}';
+        return "\nPropertyDeclaration{" +
+                modifier != null ?   "\nmodifier=" + modifier : "" +
+                ", \nproperty=" + property +
+                value != null ? ",\n value=" +  value : "" +
+                "\n}";
     }
 }

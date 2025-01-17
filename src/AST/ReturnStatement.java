@@ -19,6 +19,6 @@ public class ReturnStatement implements ASTNode {
     public String toString() {
         return "\nReturnStatement{" +
                 "\nexpression=" + expression +
-                '}';
+                "\n}";
     }
 }

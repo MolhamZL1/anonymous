@@ -19,9 +19,9 @@ public class ObjectName implements ASTNode {
 
     @Override
     public String toString() {
-        return "ObjectName{" +
+        return "\nObjectName{" +
                 "name='" + name + '\'' +
                 ", type=" + (type != null ? type.toString() : "null") +
-                '}';
+                "\n}";
     }
 }

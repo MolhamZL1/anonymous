@@ -13,8 +13,8 @@ public class ClassMember implements ASTNode {
 
     @Override
     public String toString() {
-        return "ClassMember{" +
-                "member=" + member +
-                '}';
+        return "\nClassMember{" +
+                member +
+                "}";
     }
 }

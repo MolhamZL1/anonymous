@@ -8,7 +8,7 @@ program
 
 importStatement
     : IMPORT (IDENTIFIER | STAR AS IDENTIFIER | importSpecifier) FROM String eos
-    | IMPORT String eos  // Side-effect import
+    | IMPORT String eos
     ;
 
 importSpecifier
@@ -39,7 +39,7 @@ importSpecifier
          |arrowMethod;
 
           arrowMethod:
-          modifier? IDENTIFIER? parameterList  (COLON IDENTIFIER?)?  ARROW LCURLY? statement* RCURLY?;
+          (modifier? IDENTIFIER)? parameterList  (COLON IDENTIFIER?)?  ARROW LCURLY? statement* RCURLY?;
 
           block:
           LCURLY statement* returnStatement? RCURLY;
@@ -72,10 +72,10 @@ constructorDecleration
 :CONSTRUCTOR parameterList block;
 
 inputDeclaration
-    : INPUT LPAREN (literal)? RPAREN property;
+    :( INPUT LPAREN (literal)? RPAREN property) eos;
 
 outputDeclaration
-    : OUTPUT LPAREN (literal)? RPAREN objectDecleration;
+    :( OUTPUT LPAREN (literal)? RPAREN objectDecleration)eos;
 
 variableDeclaration
     :(modifier? type)? IDENTIFIER (COLON expression)?  (EQUAL expression)? (AS IDENTIFIER)? eos;
@@ -113,24 +113,26 @@ literal
         | expressionStatement;
 
         expression
-            : expression list
-            | objectLiteral
-            | objectDecleration
-            | objectName
-            | arrowMethod
-            | expression EQUAL (dataStructure|literal)
-            | THIS
-            | IDENTIFIER
-            | IDENTIFIER PLUS PLUS
-            | IDENTIFIER MINUS MINUS
-            | literal
-            | callingMethod
-            | expression DOT expression
-            | expression compersion expression
-            | expression operator expression
-            | LESS_THAN expression GREATER_THAN IDENTIFIER
-            | LPAREN expression AS IDENTIFIER RPAREN
-            | dataStructure;
+            : expression list                                   #ExpressionList//
+            | objectLiteral                                     #ObjectLiteralExpression//
+            | objectDecleration                                 #ObjectDeclarationExpression//
+            | objectName                                        #ObjectNameExpression//
+            | arrowMethod                                       #ArrowMethodExpression//
+            | expression EQUAL (dataStructure | literal)        #AssignmentExpression//
+            | THIS                                              #ThisExpression//
+            | IDENTIFIER                                        #IdentifierExpression//
+            | IDENTIFIER PLUS PLUS                              #PostIncrementExpression//
+            | IDENTIFIER MINUS MINUS                            #PostDecrementExpression//
+            | literal                                           #LiteralExpression//
+            | callingMethod                                     #CallingMethodExpression//
+            | expression DOT expression                         #DotExpression//
+            | expression compersion expression                  #ComparisonExpression//
+            | expression operator expression                    #OperatorExpression//
+            | LESS_THAN expression GREATER_THAN IDENTIFIER      #GenericTypeExpression
+            | LPAREN expression AS IDENTIFIER RPAREN            #TypeCastExpression
+            | dataStructure                                     #DataStructureExpression//
+            ;
+
 
 
 ifStatement
@@ -138,10 +140,12 @@ ifStatement
     |shortIf
     |arrowIf;
 
-elseIfStatment:ELSEIF LPAREN expression  RPAREN block;
+elseIfStatment:ELSEIF LPAREN expression RPAREN block;
 elseStatment:ELSE block;
 
-shortIf:LPAREN? expression  RPAREN? QUESITIONMARK LPAREN?  statement RPAREN?  (COLON LPAREN? expression  RPAREN? QUESITIONMARK LPAREN?  statement RPAREN? )* COLON LPAREN?  statement RPAREN? ;
+shortIf:LPAREN? expression  RPAREN? QUESITIONMARK LPAREN?  statement RPAREN?  (shortElseIf )* shortelse ;
+shortElseIf:COLON LPAREN? expression  RPAREN? QUESITIONMARK LPAREN?  statement RPAREN?;
+shortelse:COLON LPAREN?  statement RPAREN?;
 
 arrowIf:LPAREN? expression  RPAREN? ARROW expression;
 

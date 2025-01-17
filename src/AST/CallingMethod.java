@@ -38,7 +38,7 @@ public class CallingMethod implements ASTNode {
     public String toString() {
         return "CallingMethod{" +
                 "methodName='" + methodName + '\'' +
-                ", arguments=" + arguments +
+               arguments +
                 ", chainedCalls=" + chainedCalls +
                 '}';
     }

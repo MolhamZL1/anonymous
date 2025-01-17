@@ -13,8 +13,8 @@ public class Template implements ASTNode {
 
     @Override
     public String toString() {
-        return "Template{" +
+        return "\nTemplate{" +
                  template+
-                '}';
+                "\n}";
     }
 }

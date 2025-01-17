@@ -1,17 +1,16 @@
 package AST;
 
-import java.beans.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Block implements ASTNode {
-    private List<Statment> statements; // List of statements
+    private List<Statement> statements; // List of statements
     private ReturnStatement returnStatement;
 
     public Block() {
         this.statements =new ArrayList<>();
     }
-  public   void addStatment(Statment statement){
+  public   void addStatment(Statement statement){
         this.statements.add(statement);
 
     }
@@ -27,8 +26,8 @@ public class Block implements ASTNode {
     @Override
     public String toString() {
         return "\nBlock{" +
-                "\nstatements=" + statements +
+               statements +
                ( returnStatement!=null? returnStatement.toString() :"" )+
-                '}';
+                "\n}";
     }
 }

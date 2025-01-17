@@ -44,12 +44,12 @@ public class ArrowMethod implements ASTNode {
 
     @Override
     public String toString() {
-        return "ArrowMethod{" +
+        return "\nArrowMethod{" +
                 "modifier='" + modifier + '\'' +
                 ", name='" + name + '\'' +
-                ", parameters=" + parameters +
+                 parameters +
                 ", returnType='" + returnType + '\'' +
-                ", statements=" + statements +
-                '}';
+                statements +
+                "\n}";
     }
 }

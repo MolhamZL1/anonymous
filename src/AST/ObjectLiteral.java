@@ -20,8 +20,8 @@ public class ObjectLiteral implements ASTNode {
 
     @Override
     public String toString() {
-        return "ObjectLiteral{" +
+        return "\nObjectLiteral{" +
                 "properties=" + properties +
-                '}';
+                "\n}";
     }
 }

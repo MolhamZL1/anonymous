@@ -22,10 +22,9 @@ public class ObjectDeclaration implements ASTNode {
 
     @Override
     public String toString() {
-        return "ObjectDeclaration{" +
+        return "\nObjectDeclaration{" +
                 "propertyOrObjectName=" + propertyOrObjectName +
                 ", objectInit=" + objectInit +
-
-                '}';
+                "\n}";
     }
 }

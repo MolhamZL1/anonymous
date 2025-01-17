@@ -13,8 +13,8 @@ public class Standalone implements ASTNode {
 
     @Override
     public String toString() {
-        return "Standalone{" +
+        return "\nStandalone{" +
                 value +
-                '}';
+                "\n}";
     }
 }

@@ -20,8 +20,8 @@ public class ParameterList implements ASTNode {
 
     @Override
     public String toString() {
-        return "ParameterList{" +
-                "parameters=" + parameters +
-                '}';
+        return "\nParameterList{" +
+                "\nparameters=" + parameters +
+                "\n}";
     }
 }

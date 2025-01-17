@@ -15,6 +15,6 @@ public class Comparison implements ASTNode {
     public String toString() {
         return "\nComparison{" +
                 comparison +
-                '}';
+                "\n}";
     }
 }
