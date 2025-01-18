@@ -1,11 +1,15 @@
 import AST.Program;
+import HtmlAST.HtmlDocument;
 import Symbol.SymbolTable;
 import antlr.AngularLexer;
 import antlr.AngularParser;
+import antlr.html.HtmlLexer;
+import antlr.html.HtmlParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import visitor.BaseVisitor;
+import visitor.HtmlBaseVisitor;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,21 +33,18 @@ public class Main {
         File folder = new File(path);
         File[] files = folder.listFiles();
         for (int i = 0; i < files.length; i++) {
-            //
 
             if (files[i].isFile()) {
-                if (files[i].getName().contains("html") || files[i].getName().contains("css")) continue;
+                if (files[i].getName().contains("ts"))
                 printAST(files[i]);
+                else if(files[i].getName().contains("html"))
+                    printAST(files[i]);
+                else continue;
             }
-
             else {
-
                 getTests(files[i].getPath());
             }}
     }
-
-
-
     public static void main(String[] args) throws IOException {
         getTests("src/Tests");
     }

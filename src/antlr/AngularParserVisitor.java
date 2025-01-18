@@ -59,18 +59,6 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUrl(AngularParser.UrlContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AngularParser#tamplate}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTamplate(AngularParser.TamplateContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AngularParser#html}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitHtml(AngularParser.HtmlContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link AngularParser#functionDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -454,4 +442,70 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitEos(AngularParser.EosContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#htmlDocument}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHtmlDocument(AngularParser.HtmlDocumentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#scriptletOrSeaWs}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScriptletOrSeaWs(AngularParser.ScriptletOrSeaWsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#htmlElements}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHtmlElements(AngularParser.HtmlElementsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#htmlElement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHtmlElement(AngularParser.HtmlElementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#htmlContent}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHtmlContent(AngularParser.HtmlContentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#htmlAttribute}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHtmlAttribute(AngularParser.HtmlAttributeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#htmlChardata}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHtmlChardata(AngularParser.HtmlChardataContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#htmlMisc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHtmlMisc(AngularParser.HtmlMiscContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#htmlComment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHtmlComment(AngularParser.HtmlCommentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#script}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScript(AngularParser.ScriptContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#style}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStyle(AngularParser.StyleContext ctx);
 }

@@ -13,7 +13,7 @@ Row row=new Row(type,value);
         this.rows.add(row);
     }
     public void print() {
-        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("----------------------Symbol Table----------------------------------");
         System.out.println("Type\t\t\t\t\t\t\t\tValue");
         System.out.println("------------------------------------------------------------------------------");
 

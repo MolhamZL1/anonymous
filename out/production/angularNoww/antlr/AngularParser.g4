@@ -2,8 +2,9 @@ parser grammar AngularParser;
 
 options { tokenVocab=AngularLexer; }
 
-program
-    : (importStatement | componentDeclaration | classDeclaration | functionDeclaration | statement)* EOF;
+program:
+   htmlDocument|(importStatement | componentDeclaration | classDeclaration | functionDeclaration | statement)* EOF ;
+
 
 
 importStatement
@@ -15,8 +16,8 @@ importSpecifier
     : LCURLY (IDENTIFIER (AS IDENTIFIER)? (COMMA IDENTIFIER (AS IDENTIFIER)?)*)? RCURLY;
 
         componentDeclaration
-            :COMPONENT LPAREN LCURLY (selector|standalone|imports|url|tamplate)
-            (COMMA(selector|standalone|imports|url|tamplate))* RCURLY RPAREN ;
+            :COMPONENT LPAREN LCURLY (selector|standalone|imports|url)
+            (COMMA(selector|standalone|imports|url))* RCURLY RPAREN ;
 
         selector:SELECTOR COLON String;
 
@@ -26,9 +27,9 @@ importSpecifier
 
         url:(TEMPLATEURL|STYLEURL) COLON String;
 
-        tamplate: TEMPLATE COLON html;
 
-        html:;
+
+
 
          functionDeclaration:
          (FUNCTION? IDENTIFIER? parameterList  (COLON IDENTIFIER?)? block)
@@ -179,4 +180,57 @@ operator
     :GREATER_THAN|LESS_THAN|GREATER_THAN_OR_EQUAL|LESS_THAN_OR_EQUAL|NOT_EQUAL|EQUAL_TO| AND | OR|EQUAL_TO3|NOT_EQUAL2;
     eos:SEMI?;
 
+htmlDocument
+    : scriptletOrSeaWs* XML? scriptletOrSeaWs* DTD? scriptletOrSeaWs* htmlElements*
+    ;
+
+scriptletOrSeaWs
+    : SCRIPTLET
+    | SEA_WS
+    ;
+
+htmlElements
+    : htmlMisc* htmlElement htmlMisc*
+    ;
+
+htmlElement
+    : TAG_OPEN TAG_NAME htmlAttribute* (
+        TAG_CLOSE (htmlContent TAG_OPEN TAG_SLASH TAG_NAME TAG_CLOSE)?
+        | TAG_SLASH_CLOSE
+    )
+    | SCRIPTLET
+    | script
+    | style
+    ;
+
+htmlContent
+    : htmlChardata? ((htmlElement | CDATA | htmlComment) htmlChardata?)*
+    ;
+
+htmlAttribute
+    : TAG_NAME (TAG_EQUALS ATTVALUE_VALUE)?
+    ;
+
+htmlChardata
+    : HTML_TEXT
+    | SEA_WS
+    ;
+
+htmlMisc
+    : htmlComment
+    | SEA_WS
+    ;
+
+htmlComment
+    : HTML_COMMENT
+    | HTML_CONDITIONAL_COMMENT
+    ;
+
+script
+    : SCRIPT_OPEN (SCRIPT_BODY | SCRIPT_SHORT_BODY)
+    ;
+
+style
+    : STYLE_OPEN (STYLE_BODY | STYLE_SHORT_BODY)
+    ;
 

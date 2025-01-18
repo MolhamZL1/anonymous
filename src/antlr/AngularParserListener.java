@@ -88,26 +88,6 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitUrl(AngularParser.UrlContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AngularParser#tamplate}.
-	 * @param ctx the parse tree
-	 */
-	void enterTamplate(AngularParser.TamplateContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AngularParser#tamplate}.
-	 * @param ctx the parse tree
-	 */
-	void exitTamplate(AngularParser.TamplateContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AngularParser#html}.
-	 * @param ctx the parse tree
-	 */
-	void enterHtml(AngularParser.HtmlContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AngularParser#html}.
-	 * @param ctx the parse tree
-	 */
-	void exitHtml(AngularParser.HtmlContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link AngularParser#functionDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -753,4 +733,114 @@ public interface AngularParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEos(AngularParser.EosContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#htmlDocument}.
+	 * @param ctx the parse tree
+	 */
+	void enterHtmlDocument(AngularParser.HtmlDocumentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#htmlDocument}.
+	 * @param ctx the parse tree
+	 */
+	void exitHtmlDocument(AngularParser.HtmlDocumentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#scriptletOrSeaWs}.
+	 * @param ctx the parse tree
+	 */
+	void enterScriptletOrSeaWs(AngularParser.ScriptletOrSeaWsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#scriptletOrSeaWs}.
+	 * @param ctx the parse tree
+	 */
+	void exitScriptletOrSeaWs(AngularParser.ScriptletOrSeaWsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#htmlElements}.
+	 * @param ctx the parse tree
+	 */
+	void enterHtmlElements(AngularParser.HtmlElementsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#htmlElements}.
+	 * @param ctx the parse tree
+	 */
+	void exitHtmlElements(AngularParser.HtmlElementsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#htmlElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterHtmlElement(AngularParser.HtmlElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#htmlElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitHtmlElement(AngularParser.HtmlElementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#htmlContent}.
+	 * @param ctx the parse tree
+	 */
+	void enterHtmlContent(AngularParser.HtmlContentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#htmlContent}.
+	 * @param ctx the parse tree
+	 */
+	void exitHtmlContent(AngularParser.HtmlContentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#htmlAttribute}.
+	 * @param ctx the parse tree
+	 */
+	void enterHtmlAttribute(AngularParser.HtmlAttributeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#htmlAttribute}.
+	 * @param ctx the parse tree
+	 */
+	void exitHtmlAttribute(AngularParser.HtmlAttributeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#htmlChardata}.
+	 * @param ctx the parse tree
+	 */
+	void enterHtmlChardata(AngularParser.HtmlChardataContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#htmlChardata}.
+	 * @param ctx the parse tree
+	 */
+	void exitHtmlChardata(AngularParser.HtmlChardataContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#htmlMisc}.
+	 * @param ctx the parse tree
+	 */
+	void enterHtmlMisc(AngularParser.HtmlMiscContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#htmlMisc}.
+	 * @param ctx the parse tree
+	 */
+	void exitHtmlMisc(AngularParser.HtmlMiscContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#htmlComment}.
+	 * @param ctx the parse tree
+	 */
+	void enterHtmlComment(AngularParser.HtmlCommentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#htmlComment}.
+	 * @param ctx the parse tree
+	 */
+	void exitHtmlComment(AngularParser.HtmlCommentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#script}.
+	 * @param ctx the parse tree
+	 */
+	void enterScript(AngularParser.ScriptContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#script}.
+	 * @param ctx the parse tree
+	 */
+	void exitScript(AngularParser.ScriptContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#style}.
+	 * @param ctx the parse tree
+	 */
+	void enterStyle(AngularParser.StyleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#style}.
+	 * @param ctx the parse tree
+	 */
+	void exitStyle(AngularParser.StyleContext ctx);
 }
