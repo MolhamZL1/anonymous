@@ -37,8 +37,8 @@ public class Main {
             if (files[i].isFile()) {
                 if (files[i].getName().contains("ts"))
                 printAST(files[i]);
-                else if(files[i].getName().contains("html"))
-                    printAST(files[i]);
+                else if(files[i].getName().contains("html"))continue;
+               //     printAST(files[i]);
                 else continue;
             }
             else {

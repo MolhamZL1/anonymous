@@ -2,8 +2,9 @@ parser grammar AngularParser;
 
 options { tokenVocab=AngularLexer; }
 
-program:
-   htmlDocument EOF ;
+program
+    : htmlDocument EOF
+    | (importStatement | componentDeclaration | classDeclaration | functionDeclaration | statement)* EOF;
 
 
 
