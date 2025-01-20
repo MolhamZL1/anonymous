@@ -8,7 +8,6 @@ import HtmlAST.*;
 import Symbol.SymbolTable;
 import antlr.AngularParser;
 import antlr.AngularParserBaseVisitor;
-import antlr.html.HtmlParser;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -1155,10 +1154,10 @@ symbolTable.addRow("variable",name);
 
         // Process htmlElements and comments
         for (int i = 0; i < ctx.children.size(); i++) {
-            if (ctx.getChild(i) instanceof HtmlParser.HtmlElementContext) {
+            if (ctx.getChild(i) instanceof AngularParser.HtmlElementContext) {
                 HtmlElement htmlElement = (HtmlElement) visit(ctx.getChild(i));
                 content.addHtmlElement(htmlElement);
-            } else if (ctx.getChild(i) instanceof HtmlParser.HtmlCommentContext) {
+            } else if (ctx.getChild(i) instanceof AngularParser.HtmlCommentContext) {
                 HtmlComment comment = (HtmlComment) visit(ctx.getChild(i));
                 content.addHtmlComment(comment);
             } else {

@@ -1,15 +1,10 @@
 import AST.Program;
-import HtmlAST.HtmlDocument;
-import Symbol.SymbolTable;
 import antlr.AngularLexer;
 import antlr.AngularParser;
-import antlr.html.HtmlLexer;
-import antlr.html.HtmlParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import visitor.BaseVisitor;
-import visitor.HtmlBaseVisitor;
 
 import java.io.File;
 import java.io.IOException;
