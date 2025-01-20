@@ -162,7 +162,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
         }
         FunctionDeclaration functionDeclaration =  new FunctionDeclaration(name, parameters, returnType, block);
         // Add the parameters directly to the FunctionDeclaration
-        symbolTable.addRow("function",name);
+        symbolTable.addSymbol("function",name,returnType!=null?"returns" +returnType:"returns void","global");
 
         return functionDeclaration;
     }
@@ -203,9 +203,10 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
     @Override
     public ASTNode visitParameter(AngularParser.ParameterContext ctx) {
-        // Create a Parameter with the name from the context
+
         String paramName = ctx.IDENTIFIER(0).getText();
-        symbolTable.addRow("parameter",paramName);
+
+
         return new Parameter(paramName);
     }
 
@@ -228,7 +229,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
                 : null;
         Block block = (Block) visit(ctx.block());
         Modifier modifier=(Modifier) visit(ctx.modifier());
-        symbolTable.addRow("method",name);
+        symbolTable.addSymbol("method",name,returnType!=null?"returns" +returnType:"returns void","local");
 
 
         return new MethodDeclaration(name, modifier, parameterList, returnType, block);
@@ -259,7 +260,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
                 arrowMethod.addStatement(statement);
             }
         }
-        if(name!=null)symbolTable.addRow("method",name);
+        if(name!=null)symbolTable.addSymbol("method",name,returnType!=null?"returns" +returnType:"returns void","local");;
 
 
         return arrowMethod;
@@ -307,7 +308,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
                 classDeclaration.addMember((ClassMember) visit(memberCtx));
             }
         }
-        symbolTable.addRow("class",name);
+        symbolTable.addSymbol("class",name,"","global");
 
         return classDeclaration;
     }
@@ -352,6 +353,7 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
         // Create and populate the NgOn node
         NgOn ngOn = new NgOn(type,parameters, returnType, block);
+        symbolTable.addSymbol(type,"ngOn",returnType!=null?"returns" +returnType:"returns void","local");
 
 
 
@@ -439,7 +441,16 @@ public class BaseVisitor extends AngularParserBaseVisitor {
         if (ctx.AS() != null) {
             alias = ctx.IDENTIFIER(1).getText();
         }
-symbolTable.addRow("variable",name);
+
+        if (type!=null){
+            if(expression instanceof Literal literal){
+                symbolTable.addSymbol(type,name,literal.getType(),"local");
+            }
+            else{
+            symbolTable.addSymbol(type,name,"expression","local");
+            }
+        }
+
         return new VariableDeclaration(modifier, type, name, expression, initialValue, alias);
     }
 
@@ -476,7 +487,14 @@ symbolTable.addRow("variable",name);
 
         String name = ctx.IDENTIFIER().getText();
         ASTNode value =(ASTNode) visit(ctx.expression());
-        symbolTable.addRow("property",name);
+        if (value!=null){
+            if(value instanceof Literal literal){
+                symbolTable.addSymbol("property",name,literal.getType(),"local");
+            }
+            else{
+                symbolTable.addSymbol("property",name,"expression","local");
+            }
+        }
 
         return new Property(name, value);
     }

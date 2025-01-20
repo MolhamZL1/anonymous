@@ -14,6 +14,7 @@ export class HeaderComponent {
   @Output() newItemEvent = new EventEmitter<any>();
   public products:any = [];
   public qty:number = 1;
+  var i=8;
   public total:number = 0;
   constructor(){
 
