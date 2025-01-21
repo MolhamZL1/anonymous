@@ -3,8 +3,8 @@ package AST;
 import AST.Expressions.Expression;
 
 public class ShortElseIf implements ASTNode {
-    private Expression expression; // The condition expression
-    private Statement statement;   // The statement that follows the condition
+    private Expression expression;
+    private Statement statement;
 
     public ShortElseIf(Expression expression, Statement statement) {
         this.expression = expression;

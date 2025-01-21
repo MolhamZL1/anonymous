@@ -1,8 +1,8 @@
 package AST;
 
 public class OutputDeclaration implements ASTNode {
-    private Literal literal;        // Optional literal (expression)
-    private ObjectDeclaration objectDeclaration;  // Object declaration (from objectDecleration)
+    private Literal literal;
+    private ObjectDeclaration objectDeclaration;
 
     public OutputDeclaration(Literal literal, ObjectDeclaration objectDeclaration) {
         this.literal = literal;

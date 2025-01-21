@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImportSpecifier implements ASTNode {
-    // Represents a single named import with an optional alias
+
     public static class Specifier {
-        private String name;  // The imported name (e.g., `A`)
-        private String alias; // The alias (e.g., `AliasA`), or null if no alias is used
+        private String name;
+        private String alias;
 
         public Specifier(String name, String alias) {
             this.name = name;

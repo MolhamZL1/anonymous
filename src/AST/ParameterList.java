@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParameterList implements ASTNode {
-    private List<Parameter> parameters; // List of parameters
+    private List<Parameter> parameters;
 
     public ParameterList() {
         this.parameters = new ArrayList<>();

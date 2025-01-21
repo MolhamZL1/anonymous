@@ -3,11 +3,11 @@ package AST;
 import java.util.List;
 
 public class MethodDeclaration implements ASTNode {
-    private String name; // Method name (IDENTIFIER)
-    private Modifier modifier; // List of modifiers
-    private ParameterList parameterList; // List of parameters
-    private String returnType; // Optional return type
-    private Block block; // Block of statements
+    private String name;
+    private Modifier modifier;
+    private ParameterList parameterList;
+    private String returnType;
+    private Block block;
 
     public MethodDeclaration(String name, Modifier modifier, ParameterList parameterList, String returnType, Block block) {
         this.name = name;

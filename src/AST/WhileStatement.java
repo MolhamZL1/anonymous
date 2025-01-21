@@ -1,8 +1,8 @@
 package AST;
 
 public class WhileStatement implements ASTNode {
-    private ASTNode condition; // The condition of the while loop
-    private Block block;       // The block of statements to execute
+    private ASTNode condition;
+    private Block block;
 
     public WhileStatement(ASTNode condition, Block block) {
         this.condition = condition;

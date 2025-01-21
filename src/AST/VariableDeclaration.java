@@ -5,10 +5,10 @@ import AST.Expressions.Expression;
 public class VariableDeclaration implements ASTNode {
     private String modifier;
     private String type;
-    private String name; // Variable name (IDENTIFIER)
-    private ASTNode expression; // Optional expression (COLON expression)
-    private ASTNode initialValue; // Optional initial value (EQUAL expression)
-    private String alias; // Optional alias for the variable (AS IDENTIFIER)
+    private String name;
+    private ASTNode expression;
+    private ASTNode initialValue;
+    private String alias;
 
     public VariableDeclaration(String modifier, String type, String name, ASTNode expression, ASTNode initialValue, String alias) {
         this.modifier = modifier;

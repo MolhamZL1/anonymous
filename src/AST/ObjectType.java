@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectType implements ASTNode {
-    private List<TypeWithList> types; // List of types with optional lists
+    private List<TypeWithList> types;
 
     public ObjectType() {
         this.types = new ArrayList<>();

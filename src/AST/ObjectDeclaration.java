@@ -1,8 +1,8 @@
 package AST;
 
 public class ObjectDeclaration implements ASTNode {
-    private ASTNode propertyOrObjectName; // Either a property or an object name
-    private ObjectInit objectInit; // The initialization of the object
+    private ASTNode propertyOrObjectName;
+    private ObjectInit objectInit;
 
     public ObjectDeclaration(ASTNode propertyOrObjectName, ObjectInit objectInit) {
         this.propertyOrObjectName = propertyOrObjectName;

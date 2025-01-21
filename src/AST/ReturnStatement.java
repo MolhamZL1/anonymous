@@ -1,7 +1,7 @@
 package AST;
 
 public class ReturnStatement implements ASTNode {
-    private ASTNode expression; // The expression being returned, if any
+    private ASTNode expression;
 
     public ReturnStatement(ASTNode expression) {
         this.expression = expression;

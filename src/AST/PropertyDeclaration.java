@@ -1,9 +1,9 @@
 package AST;
 
 public class PropertyDeclaration implements ASTNode {
-    private Modifier modifier; // Optional modifier
-    private Property property; // The property
-    private ASTNode value;     // Optional assigned value (expression)
+    private Modifier modifier;
+    private Property property;
+    private ASTNode value;
 
     public PropertyDeclaration(Modifier modifier, Property property, ASTNode value) {
         this.modifier = modifier;

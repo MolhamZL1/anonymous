@@ -1,8 +1,8 @@
 package AST;
 
 public class ObjectName implements ASTNode {
-    private String name; // The IDENTIFIER
-    private ObjectType type; // The optional objectType
+    private String name;
+    private ObjectType type;
 
     public ObjectName(String name, ObjectType type) {
         this.name = name;

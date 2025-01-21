@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectInit implements ASTNode {
-    private String className; // The IDENTIFIER (class name)
-    private ObjectType objectType; // The optional objectType
-    private List<ASTNode> arguments; // List of arguments (expressions)
+    private String className;
+    private ObjectType objectType;
+    private List<ASTNode> arguments;
 
     public ObjectInit(String className, ObjectType objectType) {
         this.className = className;

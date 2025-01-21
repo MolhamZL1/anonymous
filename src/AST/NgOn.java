@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NgOn implements ASTNode {
-    private String type; // Either NGONINIT or NGONCHANGES
-    private ParameterList parameters; // List of parameters
-    private String returnType; // Optional return type
-    private Block block; // Block content
+    private String type;
+    private ParameterList parameters;
+    private String returnType;
+    private Block block;
 
     public NgOn(String type,ParameterList parameters, String returnType, Block block) {
         this.type = type;

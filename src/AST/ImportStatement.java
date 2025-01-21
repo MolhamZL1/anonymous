@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImportStatement implements ASTNode {
-    private String source; // The source of the import (e.g., "module")
-    private String defaultImport; // Default import (e.g., `import Foo from "module";`)
-    private ImportSpecifier.Specifier wildcardImport; // Wildcard import (e.g., `import * as Bar from "module";`)
-    private List<ImportSpecifier> namedImports; // List of named imports
+    private String source;
+    private String defaultImport;
+    private ImportSpecifier.Specifier wildcardImport;
+    private List<ImportSpecifier> namedImports;
 
     public ImportStatement() {
         this.namedImports = new ArrayList<>();

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShortIf implements ASTNode {
-    private ASTNode expression;            // The condition for the if statement
-    private Statement statement;              // The statement executed if the condition is true
-    private List<ShortElseIf> shortElseIfs;   // A list of else-if blocks
-    private ShortElse shortElse;              // The else block at the end
+    private ASTNode expression;
+    private Statement statement;
+    private List<ShortElseIf> shortElseIfs;
+    private ShortElse shortElse;
 
     public ShortIf(ASTNode expression, Statement statement) {
         this.expression = expression;

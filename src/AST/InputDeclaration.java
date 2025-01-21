@@ -1,8 +1,8 @@
 package AST;
 
 public class InputDeclaration implements ASTNode {
-    private Literal literal; // Optional literal (could be a value like a string, number, etc.)
-    private Property property; // The property name
+    private Literal literal;
+    private Property property;
 
     public InputDeclaration(Literal literal, Property property) {
         this.literal = literal;
